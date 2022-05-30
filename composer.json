@@ -1,0 +1,19 @@
+{
+    "name": "mattias/dentista",
+    "description": "Proyecto final de programacion 3",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mattias\\Dentista\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mattias",
+            "email": "duartemattias3@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

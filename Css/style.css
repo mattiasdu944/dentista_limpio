@@ -1,0 +1,42 @@
+/* GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* VARIABLES CSS */
+:root{
+    /* tipografia  */
+    --big-size: 4rem;
+    --h1-size: 3rem;
+    --h2-size: 2.5rem;
+    --h3-size: 2rem;
+    --h4-size: 1.5rem;
+    --h5-size: 1.3rem;
+    --text-size: 1rem;
+
+    /* colores */
+    
+}
+
+/* RESET CSS */
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* CLASES REUSABLES */
+.container{
+    max-width: 1020px;
+    margin: 0 auto;
+}
+
+.section{
+    min-height: 95vh;
+    padding: 4rem 0rem 2rem;
+}
