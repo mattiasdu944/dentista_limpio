@@ -12,27 +12,48 @@
     --h5-size: 1.3rem;
     --text-size: 1rem;
 
-    /* colores */
+    --bold-weight: 600;
+    --semi-weight: 500;
+    --regular-weight: 400;
+
     
+    /* colores */
+    --body-color:#F7FAFD;
+    --text-color:#1B3A65;
+    --primary-color:#4DB29E;
+    --secondary-color:#D5E6F7;
 }
 
 /* RESET CSS */
 *{
-    font-family: 'Poppins', sans-serif;
-}
-
-body{
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
+    transition: all .3s ease-in-out;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul,li{
+    list-style: none;
+}
 h1, h2, h3, h4, h5, h6{
     font-family: 'Poppins', sans-serif;
 }
 
+i{
+    cursor: pointer;
+}
+
 /* CLASES REUSABLES */
 .container{
-    max-width: 1020px;
+    max-width: 1090px;
     margin: 0 auto;
 }
 
@@ -40,3 +61,73 @@ h1, h2, h3, h4, h5, h6{
     min-height: 95vh;
     padding: 4rem 0rem 2rem;
 }
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    width: 100%;
+}
+
+.navbar_container{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.navbar_menu{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.navbar_item_link{
+    color: var(--text-color);
+    font-weight: var(--semi-weight);
+}
+
+.navbar_toogle, .navbar_close{
+    font-size: 1.3rem;
+    display: none;
+}
+
+.navbar_toogle:active, .navbar_close:active{
+    transform: scale(.95);
+}
+
+.navbar_close{
+    color: var(--body-color);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: .2rem .5rem;
+    font-weight: var(--semi-weight);
+}
+
+
+@media screen and (max-width: 992px){
+    .container{
+        max-width: 80%;
+    }
+    .navbar_menu{
+        position: fixed;
+        top: -100rem;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--secondary-color);
+        flex-direction: column;
+    }
+
+    .navbar_menu_show{
+        top: 0;
+    }
+
+    .navbar_toogle{
+        display: block;
+    }
+    .navbar_close{
+        display: block;
+    }
+}
+    

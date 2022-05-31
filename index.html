@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,71 +9,88 @@
     <link rel="stylesheet" href="./Css/style.css">
     <link rel="stylesheet" href="./Css/index.css">
 
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
     <title>Document</title>
 </head>
+
 <body>
     <header>
         <!-- NAVBAR -->
-        <nav class="navbar container" id="navbar">
-            <div class="navbar_logo">
-                <a href="/">Logo</a>
-            </div>
-            <div class="navbar_menu">
-                <ul>
-                    <li class="navbar_item">
-                        <a href="#inicio" class="navbar_item_link">
-                            Inicio
-                        </a>
-                    </li>
-                    <li class="navbar_item">
-                        <a href="#informacion" class="navbar_item_link">
-                            Informacion
-                        </a>
-                    </li>
-                    <li class="navbar_item">
-                        <a href="#servicios" class="navbar_item_link">
-                            Servicios
-                        </a>
-                    </li>
-                    <li class="navbar_item">
-                        <a href="#equipo" class="navbar_item_link">
-                            Equipo
-                        </a>
-                    </li>
-                    <li class="navbar_item">
-                        <a href="#" class="navbar_item_link">
-                            Agrendar Cita
-                        </a>
-                    </li>
-                    <div class="navbar_close" id="nav-close">
-                        <ion-icon name="close-outline"></ion-icon>
-                    </div>
-                </ul>
-            </div>
-            <div class="navbar_toogle" id="nav-toggle">
-                <ion-icon name="grid-outline"></ion-icon>
+        <nav class="navbar " id="navbar">
+            <div class="navbar_container container">
+
+                <div class="navbar_logo">
+                    <a href="/">
+                        <img src="./src/images/logo.png" alt="" srcset="">
+                    </a>
+                </div>
+                <div >
+                    <ul class="navbar_menu" id="nav-menu">
+                        <li class="navbar_item">
+                            <a href="#inicio" class="navbar_item_link">
+                                Inicio
+                            </a>
+                        </li>
+                        <li class="navbar_item">
+                            <a href="#informacion" class="navbar_item_link">
+                                Informacion
+                            </a>
+                        </li>
+                        <li class="navbar_item">
+                            <a href="#servicios" class="navbar_item_link">
+                                Servicios
+                            </a>
+                        </li>
+                        <li class="navbar_item">
+                            <a href="#equipo" class="navbar_item_link">
+                                Equipo
+                            </a>
+                        </li>
+                        <li class="navbar_item">
+                            <a href="#" class="navbar_item_link">
+                                Agrendar Cita
+                            </a>
+                        </li>
+                        <div class="navbar_close" id="nav-close">
+                            <i class="uil uil-times"></i>
+                        </div>
+                    </ul>
+                </div>
+                <div class="navbar_toogle" id="nav-toggle">
+                    <i class="uil uil-apps"></i>
+                </div>
             </div>
         </nav>
 
         <!-- SECCION INICIO -->
-        <main class="section container inicio" id="inicio">
-
+        <main class="section  inicio" id="inicio">
+            <div class="inicio_container container">
+                <h1>Clinica Dental</h1>
+                <span>Los Apextosos</span>
+            </div>
         </main>
     </header>
 
     <!-- SECCION INFORMACION -->
-    <section class="section container informacion" id="informacion">
-
+    <section class="section  informacion" id="informacion">
+        <div class="informacion_container container">
+            <h2>Informacion</h2>
+        </div>
     </section>
 
     <!-- SECCION SERVICIOS -->
-    <section class="section container servicios" id="servicios">
-
+    <section class="section  servicios" id="servicios">
+        <div class="servicios_container container">
+            <h2>Servicios</h2>
+        </div>
     </section>
 
     <!-- SECCION EQUIPO -->
-    <section class="section container esquipo" id="equipo">
-
+    <section class="section  esquipo" id="equipo">
+        <div class="equipo_container container">
+            <h2>Equipo</h2>
+        </div>
     </section>
 
     <footer class="container footer">
@@ -83,8 +101,6 @@
 
     <!-- MAIN JS -->
     <script src="./Javascript/main.js"></script>
-    <!-- PACK DE IONICONS -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
+   </body>
+
 </html>
