@@ -4,12 +4,12 @@
 /* VARIABLES CSS */
 :root{
     /* tipografia  */
-    --big-size: 4rem;
-    --h1-size: 3rem;
-    --h2-size: 2.5rem;
-    --h3-size: 2rem;
-    --h4-size: 1.5rem;
-    --h5-size: 1.3rem;
+    --big-size: 4.5rem;
+    --h1-size: 3.5rem;
+    --h2-size: 3rem;
+    --h3-size: 2.75rem;
+    --h4-size: 2.5rem;
+    --h5-size: 2rem;
     --text-size: 1rem;
 
     --bold-weight: 600;
@@ -30,6 +30,7 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
     transition: all .3s ease-in-out;
+    line-height: 1.4;
 }
 
 html{
@@ -43,12 +44,34 @@ a{
 ul,li{
     list-style: none;
 }
+
 h1, h2, h3, h4, h5, h6{
     font-family: 'Poppins', sans-serif;
+    font-weight: var(--bold-weight);
 }
 
 i{
     cursor: pointer;
+}
+
+h1{
+    font-size: var(--h1-size);
+}
+
+h2{
+    font-size: var(--h2-size);
+}
+
+h3{
+    font-size: var(--h3-size);
+}
+
+h4{
+    font-size: var(--h4-size);
+}
+
+h5{
+    font-size: var(--h5-size);
 }
 
 /* CLASES REUSABLES */
@@ -59,13 +82,33 @@ i{
 
 .section{
     min-height: 95vh;
-    padding: 4rem 0rem 2rem;
+    padding: 4.5rem 0rem 2rem;
+}
+
+.big-text{
+    font-size: var(--big-size);
+    font-weight: var(--bold-weight);
+}
+
+.text-color{
+    color: var(--primary-color);
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 2rem;
+}
+
+.flex{
+    display: flex;
 }
 
 /* NAVBAR */
 nav{
     position:fixed;
     width: 100%;
+    background-color: var(--secondary-color);
+    /* box-shadow: 0px 0px 10px rgba(0,0,0,0.1); */
 }
 
 .navbar_container{
@@ -105,6 +148,28 @@ nav{
 }
 
 
+/* FOOTER */
+.footer{
+    background-color:var(--text-color);
+    padding: 4rem 0;
+}
+.footer{
+    color: var(--body-color);
+}
+
+footer h5{
+    color: var(--primary-color);
+}
+
+
+.footer_container{
+
+    gap: 3rem;
+    justify-content: space-around;
+}
+
+
+
 @media screen and (max-width: 992px){
     .container{
         max-width: 80%;
@@ -131,3 +196,15 @@ nav{
     }
 }
     
+@media screen and (max-width: 768px){
+    :root{
+        /* tipografia  */
+        --big-size: 3rem;
+        --h1-size: 2.5rem;
+        --h2-size: 2rem;
+        --h3-size: 1.5rem;
+        --h4-size: 1rem;
+        --h5-size: .7rem;
+        --text-size: .5rem;
+    }
+}
