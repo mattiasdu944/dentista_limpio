@@ -22,3 +22,4 @@ navLinks.forEach(link => {
         navMenu.classList.remove('navbar_menu_show');
     });
 });
+
