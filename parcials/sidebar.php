@@ -16,7 +16,7 @@
             <img src="./assets/images/logo.png" width="20px" alt="imagen">
             <span class="nav__logo-name">Dentista</span>
         </a>
-
+        <hr>
         <div class="nav__list">
             <a href="./admCitas.php" class="nav__link">
                 <i class="uil uil-file-alt"></i>
@@ -146,6 +146,10 @@ i{
 /* Active link */
 .active-link {
   color: var(--first-color);
+}
+
+.nav{
+  z-index: 1;
 }
 
 /*=============== BREAKPOINTS ===============*/
