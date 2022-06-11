@@ -9,18 +9,20 @@
     color:var(--text-color);
     gap: 3rem;
 }
+
 .inicio_content{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
+
 .inicio_img img{
     background-color: var(--primary-color);
     border-radius: 4rem 1rem;
     width: 320px;
 }
-/*=======Informacion=======*/
 
+/*=======Informacion=======*/
 .information_container{
     flex-direction:row-reverse;
     gap: 3rem;
@@ -28,15 +30,13 @@
 
 .information_title{
     color:var(--text-color)
-}
- 
+} 
 
 .information_content{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
-
 
 .information_text{
     line-height: 1.7;
@@ -73,9 +73,9 @@
 .information_img-content:hover img{
   transform: scale(1.1);
 }
+
 .btn-primary{
     background-color: var(--primary-color);
-    
     color: #ffffff;
     font-size: 17px;
     font-weight: 500;
@@ -90,22 +90,18 @@
     z-index: 1;
 }
 
-
-
 /* SERVICIOS */
 .servicios_cards{
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
 .servicios_card_item{
-
     flex: auto;
-
     background-color: var(--secondary-color);
     border-radius: 2rem;
     padding: 2rem;
 }
-
 
 .card_logo img{
     width: 64px;
