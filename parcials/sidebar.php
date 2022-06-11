@@ -13,7 +13,7 @@
         </div>
 
         <a href="#" class="nav__logo">
-            <img src="./src/images/logo.png" width="20px" alt="imagen">
+            <img src="./assets/images/logo.png" width="20px" alt="imagen">
             <span class="nav__logo-name">Dentista</span>
         </a>
 
