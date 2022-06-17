@@ -27,6 +27,7 @@
         <div class="d-flex">
             <p><span class="special_text big-text">3</span> pacientes</p>
             
+            
         </div>
         <div class="scroll">
 
@@ -125,6 +126,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -207,9 +209,6 @@
             justify-content: space-around;
         }
     </style>
-
-
-    
     <script src="./Javascript/bootstrap.min.js"></script>
 </body>
 

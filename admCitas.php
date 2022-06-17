@@ -24,11 +24,7 @@
             </p>
         </div>
         <hr>
-        <div class="d-flex">
-            <p><span class="special_text big-text">4</span> Citas</p>
-            
-        </div>
-        <div class="scroll">
+        <!-- <div class="scroll">
 
             <table class="table">
                 <thead>
@@ -125,7 +121,147 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <setion class="section main grid">
+            <div class="form_citas">
+                <div class="form_citas_title">
+                    <h3>Agendar Cita</h3>
+                </div>
+                <form action="ctrlCitas.php" method="POST">
+                    <div class="row">
+
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="pacNombre" class="form-label">Nombre/s</label>
+                            <input type="text" class="form-control" names="pacNombre" id="pacNombre"
+                                aria-describedby="helpId" placeholder="Ingresa tu nombre">
+                        </div>
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="pacCI" class="form-label">CI</label>
+                            <input type="text" class="form-control" name="pacCI" id="pacCI" aria-describedby="helpId"
+                                placeholder="Ingresa tu CI">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="pacPaterno" class="form-label">Apellido Paterno</label>
+                            <input type="text" class="form-control" name="pacPaterno" id="pacPaterno" aria-describedby="helpId">
+                        </div>
+                        <div class="col-12 col-md-6  mb-3 ">
+                            <label for="pacMaterno" class="form-label">Apellido Materno</label>
+                            <input type="text" class="form-control" name="pacMaterno" id="pacMaterno" aria-describedby="helpId">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="pacEdad" class="form-label">Edad</label>
+                            <input type="number" class="form-control" name="pacEdad" id="pacEdad">
+                        </div>
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="pacTelefono" class="form-label">Telefono</label>
+                            <input type="number" max="99999999" class="form-control" name="pacTelefono" id="pacTelefono" aria-describedby="helpId">
+                        </div>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="pacCorreo" class="form-label">Correo</label>
+                        <input type="email" class="form-control" name="pacCorreo" id="pacCorreo" aria-describedby="helpId">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6  mb-3 ">
+                            <label for="citaFecha" class="form-label">Fecha de la Cita</label>
+                            <input type="date" class="form-control" name="citaFecha" id="citaFecha" aria-describedby="helpId">
+                        </div>
+                        <div class="col-12 col-md-6  mb-3 ">
+                            <label for="citaFecha" class="form-label">Hora de la Cita</label>
+                            <input type="time" class="form-control" name="citaHora" id="citaFecha" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dirConsultorio" class="form-label">Direccion Consultorio</label>
+                        <select class="mb-3 form-select" name="dirConsultorio" id="dirConsultorio" aria-label="Default select example">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="procConsultorio" class="form-label">Procedimiento</label>
+                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio" aria-label="Default select example">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <!-- <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="lista_citas">
+                <div class="lista_citas_title">
+                    <h3>Lista de Citas</h3>
+                </div>
+                <div class="cita_item">
+                    <div class="row">
+                        <div class="col-6 cita_item_title">
+                            <h3>Cita 1</h3>
+                        </div>
+                        <div class="col-6 cita_item_icons">
+                            <button type="button" class="button-editar" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="uil uil-pen"></i>
+                            </button>
+                            <button type="button" class="button-borrar" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="uil uil-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cita_item_body">
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-6  cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Nombre Completo</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>Mattias Alexandre Duarte Aparicio</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6  cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Telefono</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>76290741</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6  cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Consultorio</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>Los Andes</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Fecha y Hora</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>19 de mayo 18:00pm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
 
@@ -134,46 +270,56 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .big-text{
+        .big-text {
             font-size: 2rem;
             font-weight: bold;
         }
 
-        .pacientes_title h1{
-            font-weight: bold;
-        }	
-        .special_text{
+        .special_text {
             color: hsl(228, 81%, 49%);
         }
-        .scroll {
-            overflow-x: auto;
-            background-color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
-            max-width: 100%;
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 3rem;
         }
 
-        @media screen and (max-width: 576px) {
-            .scroll {
-                overflow-x: auto;
-                background-color: white;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
-                max-width: 90%;
-            }
+        /* FORMULARIO DE LAS CITAS */
+        form {
+            padding: 1.25rem 2rem;
+            background-color: white;
+            border-radius: .75rem;
+            box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
         }
-            
-        
-        td {
-            color: hsl(228, 8%, 50%);
-            text-align: center;
+
+        .cita_item {
+            padding: 1.25rem 2rem;
+            background-color: white;
+            border-radius: .75rem;
+            box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
+        }
+
+        .card_item h3,h4,h5,h6 {
+            font-weight: bold;
+            color: rgb(51, 51, 51);
+        }
+
+        .cita_item_body_item_title h4{
+            font-size: 1.2rem;
+        }
+
+        .cita_item_icons{
+            display: flex;
+            justify-content: end;
+            gap:2rem;
+            align-items: center;
         }
 
         i {
             cursor: pointer;
             display: flex;
+            font-size:1.25rem;
         }
 
         button {
@@ -200,16 +346,10 @@
             transform: translateY(-2px);
             color: hsl(0, 100%, 61%);
         }
-
-
-        .table_actions {
-            display: flex;
-            justify-content: space-around;
-        }
     </style>
 
 
-    
+
     <script src="./Javascript/bootstrap.min.js"></script>
 </body>
 
