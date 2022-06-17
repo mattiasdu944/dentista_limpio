@@ -32,6 +32,10 @@
                 <i class="uil uil-building"></i>
                 <span class="nav__name">Consultorios</span>
             </a>
+            <a href="./admProcedimientos.php" class="nav__link">
+              <i class="uil uil-medkit"></i>
+                <span class="nav__name">Control de Serivcios</span>
+            </a>
         </div>
     </nav>
 </div>

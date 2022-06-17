@@ -1,5 +1,8 @@
 <?php
     require_once("vendor/autoload.php");
+    $listaProcedimientos = Mattias\Dentista\Procedimiento::listar(new Mattias\Dentista\Mysql());
+    $listaConsultorio = Mattias\Dentista\Consultorio::listar(new Mattias\Dentista\Mysql());
+    // var_dump($listaConsultorio);
 ?>
 <!--uwu -->
 <!DOCTYPE html>
@@ -18,114 +21,107 @@
     <?php include('parcials/sidebar.php');?>
     <main class="container section">
         <div class="pacientes_title">
-            <h1>Consultorios</h1>
+            <h1>Administrador de Consultorios</h1>
             <p>
                 Administra tus Consultorios aquí.
             </p>
         </div>
         <hr>
-        <div class="d-flex">
-            <p><span class="special_text big-text">2</span> Consultorios</p>
-            
-        </div>
-        <div class="scroll">
+        <setion class="section main grid">
+            <div class="form_citas">
+                <div class="form_citas_title">
+                    <h3>Agregar Consultorio</h3>
+                </div>
+                <form action="ctrlCitas.php" method="POST">
+                    <div class="row">
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">CI</th>
-                        <th scope="col">Nombre/s</th>
-                        <th scope="col">Apellido/s</th>
-                        <th scope="col">Correo Electronico</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Citas</th>
-                        <th scope="col">Consultorio</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td>10017600</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>duartemattias3@gmail.com</td>
-                    <td>76290741</td>
-                    <td>19</td>
-                    <td>Pendiente</td>
-                    <td>Miraflores</td>
-                    <td class="table_actions">
-                        <button type="button" class="button-editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="uil uil-pen"></i>
-                        </button>
-                        <button type="button" class="button-borrar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="uil uil-trash-alt"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>10017700</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>duartemattias3@gmail.com</td>
-                    <td>76290741</td>
-                    <td>19</td>
-                    <td>Pendiente</td>
-                    <td>Miraflores</td>
-                    <td class="table_actions">
-                        <button type="button" class="button-editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="uil uil-pen"></i>
-                        </button>
-                        <button type="button" class="button-borrar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="uil uil-trash-alt"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>6081239</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>duartemattias3@gmail.com</td>
-                    <td>76290741</td>
-                    <td>19</td>
-                    <td>Pendiente</td>
-                    <td>Miraflores</td>
-                    <td class="table_actions">
-                        <button type="button" class="button-editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="uil uil-pen"></i>
-                        </button>
-                        <button type="button" class="button-borrar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="uil uil-trash-alt"></i>
-                        </button>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="dirConsultorio" class="form-label">Direccion/s</label>
+                            <input type="text" class="form-control" name="dirConsultorio" id="dirConsultorio"
+                                aria-describedby="helpId" placeholder="Ingresa tu nombre">
                         </div>
-                        <div class="modal-body">
-                            ...
+                        <div class="col-12 col-md-6  mb-3">
+                            <label for="horasConsultorio" class="form-label">Horarios</label>
+                            <input type="text" class="form-control" name="horasConsultorio" id="horasConsultorio"
+                                aria-describedby="helpId" placeholder="Ingresa tu CI">
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="procConsultorio" class="form-label">Procedimientos</label>
+                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio"
+                            aria-label="Default select example">
+                            <?php foreach ($listaProcedimientos as $procedimiento) { ?>
+                            <option value="<?= $procedimiento->getId()?>">
+                                <?= $procedimiento->getTipo_procedimiento(); ?>
+                            </option>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="lista_citas">
+                <div class="lista_citas_title">
+                    <h3>Consultorios</h3>
+                </div>
+                <div class="cita_item">
+                    <div class="row">
+                        <div class="col-6 cita_item_title">
+                            <h3>Cita 1</h3>
+                        </div>
+                        <div class="col-6 cita_item_icons">
+                            <button type="button" class="button-editar" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="uil uil-pen"></i>
+                            </button>
+                            <button type="button" class="button-borrar" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="uil uil-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cita_item_body">
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-6  cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Nombre Completo</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>Mattias Alexandre Duarte Aparicio</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6  cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Telefono</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>76290741</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6  cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Consultorio</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>Los Andes</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Fecha y Hora</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>19 de mayo 18:00pm</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-        </div>
+            </section>
     </main>
 
 
@@ -134,46 +130,59 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .big-text{
+        .big-text {
             font-size: 2rem;
             font-weight: bold;
         }
 
-        .pacientes_title h1{
-            font-weight: bold;
-        }	
-        .special_text{
+        .special_text {
             color: hsl(228, 81%, 49%);
         }
-        .scroll {
-            overflow-x: auto;
-            background-color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
-            max-width: 100%;
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 3rem;
         }
 
-        @media screen and (max-width: 576px) {
-            .scroll {
-                overflow-x: auto;
-                background-color: white;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
-                max-width: 90%;
-            }
+        /* FORMULARIO DE LAS CITAS */
+        form {
+            padding: 1.25rem 2rem;
+            background-color: white;
+            border-radius: .75rem;
+            box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
         }
-            
-        
-        td {
-            color: hsl(228, 8%, 50%);
-            text-align: center;
+
+        .cita_item {
+            padding: 1.25rem 2rem;
+            background-color: white;
+            border-radius: .75rem;
+            box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
+        }
+
+        .card_item h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: bold;
+            color: rgb(51, 51, 51);
+        }
+
+        .cita_item_body_item_title h4 {
+            font-size: 1.2rem;
+        }
+
+        .cita_item_icons {
+            display: flex;
+            justify-content: end;
+            gap: 2rem;
+            align-items: center;
         }
 
         i {
             cursor: pointer;
             display: flex;
+            font-size: 1.25rem;
         }
 
         button {
@@ -200,16 +209,10 @@
             transform: translateY(-2px);
             color: hsl(0, 100%, 61%);
         }
-
-
-        .table_actions {
-            display: flex;
-            justify-content: space-around;
-        }
     </style>
 
 
-    
+
     <script src="./Javascript/bootstrap.min.js"></script>
 </body>
 

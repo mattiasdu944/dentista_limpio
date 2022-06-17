@@ -1,10 +1,9 @@
 <?php
     require_once("vendor/autoload.php");
     
-    $listaPacientes = Mattias\Dentista\Paciente::listar(new Mattias\Dentista\Mysql());
-    // var_dump($listaPacientes);
+    $listaProcedimientos = Mattias\Dentista\Procedimiento::listar(new Mattias\Dentista\Mysql());
+    // var_dump($listaProcedimientos);
 ?>
-<!--uwu -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,14 +20,15 @@
     <?php include('parcials/sidebar.php');?>
     <main class="container section">
         <div class="pacientes_title">
-            <h1>Lista de Pacientes</h1>
+            <h1>Procedimientos Odontologicos</h1>
             <p>
-                Administra tus Pacientes aquí.
+                Administra tus tus servicios y procedimientos aquí.
             </p>
         </div>
         <hr>
         <div class="d-flex">
-            <p><span class="special_text big-text"><?=count($listaPacientes)?></span> Pacientes</p>
+            
+            <p><span class="special_text big-text"><?=count($listaProcedimientos)?></span> Procedimiento</p>
             
             
         </div>
@@ -37,35 +37,25 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">CI</th>
-                        <th scope="col">Nombre/s</th>
-                        <th scope="col">Apellido/s</th>
-                        <th scope="col">Correo Electronico</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tipo/s</th>
+                        <th scope="col">Estado/s</th>
+                        <th scope="col">Costo Promedio</th>
                     </tr>
                 </thead>
-                <?php foreach ($listaPacientes as $paciente) { ?>
+                <?php foreach ($listaProcedimientos as $procedimiento) { ?>
                 <tr>
                     <td>
-                        <?= $paciente->getCi(); ?>
+                        <?php echo $procedimiento->getId(); ?>
                     </td>
                     <td>
-                        <?= $paciente->getNombres(); ?>
+                        <?= $procedimiento->getTipo_procedimiento(); ?>
                     </td>
                     <td>
-                        <?= $paciente->getPaterno();?>
-                        <?= $paciente->getMaterno();?>
+                        <?= $procedimiento->getEstado();?>
                     </td>
                     <td>
-                        <?= $paciente->getCorreo(); ?>
-                    </td>
-                    <td>
-                        <?= $paciente->getTelefono(); ?>
-                    </td>
-                    <td>
-                        <?= $paciente->getEdad(); ?>
+                        <?= $procedimiento->getCosto(); ?>
                     </td>
                     <td class="table_actions">
                         <button type="button" class="button-editar" data-bs-toggle="modal"
