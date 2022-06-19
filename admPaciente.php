@@ -249,7 +249,7 @@
                 padding: 1rem 2rem;
                 border-radius: 10px;
                 box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
-                max-width: 90%;
+                max-width: 100%;
             }
         }
 

@@ -28,7 +28,7 @@ class Procedimiento{
 
 
     // LISTAR ELEMENTOS DE BD
-    public static function listar(Db $db)
+    public static function listarTodo(Db $db)
     {
         $c = $db->getConexion();
         $sql = "SELECT * FROM procedimiento";
@@ -38,6 +38,25 @@ class Procedimiento{
         return $sentencia->fetchAll();
     }
 
+        // LISTAR ELEMENTOS DE BD
+    public static function listarActivos(Db $db)
+    {
+        $c = $db->getConexion();
+        $sql = "SELECT * FROM procedimiento WHERE estado = 1";
+        $sentencia = $c->prepare($sql);
+        $sentencia->execute();
+        $sentencia->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,'Mattias\Dentista\Procedimiento',array(null,null,null,null));
+        return $sentencia->fetchAll();
+    }
+
+    public function eliminar(Db $db)
+    {
+        $c = $db->getConexion();
+        $sql = "DELETE FROM procedimiento WHERE id = :id";
+        $sentencia = $c->prepare($sql);
+        $sentencia->bindParam(':id',$this->id);
+        return $sentencia->execute();
+    }
     /**
      * Get the value of id
      */ 

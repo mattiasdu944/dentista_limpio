@@ -29,7 +29,7 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
     transition: all .3s ease-in-out;
-    line-height: 1.5;
+    line-height: 1.3;
 }
 
 html{
@@ -80,13 +80,13 @@ h5{
 
 /* CLASES REUSABLES */
 .container{
-    max-width: 910px;
+    max-width: 1020px;
     margin: 0 auto;
 }
 
 .section{
     min-height: 80vh;
-    padding:5rem 0 1rem;
+    padding:4rem 0 1rem;
 }
 
 .big-text{

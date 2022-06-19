@@ -1,8 +1,6 @@
 <?php
     require_once("vendor/autoload.php");
-    
-    $listaProcedimientos = Mattias\Dentista\Procedimiento::listar(new Mattias\Dentista\Mysql());
-    // var_dump($listaProcedimientos);
+    $listaProcedimientos = Mattias\Dentista\Procedimiento::listarTodo(new Mattias\Dentista\Mysql());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,9 +75,10 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Tipo/s</th>
-                        <th scope="col">Estado/s</th>
-                        <th scope="col">Costo Promedio</th>
+                        <th >Tipo de Procedimiento</th>
+                        <th >Estado</th>
+                        <th >Costo Promedio</th>
+                        <th >Acciones</th>
                     </tr>
                 </thead>
                 <?php foreach ($listaProcedimientos as $procedimiento) { ?>
@@ -91,18 +90,38 @@
                         <?= $procedimiento->getTipo_procedimiento(); ?>
                     </td>
                     <td>
-                        <?= $procedimiento->getEstado();?>
+                        <?php
+                            if($procedimiento->getEstado() == 1){
+                                echo "Activo";
+                            }else{
+                                echo "Inactivo";
+                            }
+                        ?>
                     </td>
                     <td>
-                        <?= $procedimiento->getCosto(); ?>
+                        <?= $procedimiento->getCosto()?>$
                     </td>
                     <td class="table_actions">
+
+                        <!-- BOTON EDITAR -->
                         <button type="button" class="button-editar" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             <i class="uil uil-pen"></i>
                         </button>
-                        <button type="button" class="button-borrar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+
+                        <!-- BOTON BORRAR -->
+                        <button 
+                            type="button" 
+                            class="button-borrar" 
+                            data-bs-toggle="modal"
+                            data-bs-target="#elimModalProcedimiento"
+                            
+                            data-id="<?php echo $procedimiento->getId()?>"
+                            data-procedimiento="<?php echo $procedimiento->getTipo_procedimiento()?>"
+                            onclick="eliminarProcedimiento(event)"
+                            >
+                            
+                            
                             <i class="uil uil-trash-alt"></i>
                         </button>
                     </td>
@@ -111,20 +130,26 @@
                 </tbody>
             </table> 
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <!-- MODAL BORRAR PROCEDIMIENTO -->
+            <div class="modal fade" id="elimModalProcedimiento" tabindex="-1" aria-labelledby="elimModalProcedimiento" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <form action="ctrlProcedimiento.php" method="POST">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Paciente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden"  name="elimProcId" id="elimProcId">
+                                <p>¿Esta seguro de eliminar el Procedimiento <span id="procedimiento"></span>?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" value="Eliminar" name="btn" class="btn btn-primary">Eliminar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -165,7 +190,7 @@
                 padding: 1rem 2rem;
                 border-radius: 10px;
                 box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
-                max-width: 90%;
+                max-width: 100%;
             }
         }
             
@@ -210,7 +235,17 @@
             justify-content: space-around;
         }
     </style>
+    
     <script src="./Javascript/bootstrap.min.js"></script>
+    <script>
+        const eliminarProcedimiento = (e) =>{
+            const id = e.currentTarget.dataset.id;
+            const procedimiento = e.currentTarget.dataset.procedimiento;
+
+            document.getElementById('procedimiento').innerHTML = procedimiento;
+            document.getElementById('elimProcId').value = id;
+        }
+    </script>
 </body>
 
 

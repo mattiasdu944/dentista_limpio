@@ -59,15 +59,15 @@ switch ($op) {
 
 
     case 'Eliminar':
-        $id = $_POST['elimIdCategoria'];
+        $id = $_POST['elimProcId'];
+        echo $id;
 
-        $cat = new Mattias\Inventario2022\Categoria(null,null,$id);
-
-        if ($cat->eliminar(new Mattias\Inventario2022\Mysql())) {
-            header('Location:admCategoria.php');
-        }
-        else {
-            echo "MAL";
+        $procedimiento = new Mattias\Dentista\Procedimiento(null,null,null,$id);
+        if ($procedimiento->eliminar(new Mattias\Dentista\Mysql())) {
+           header('Location:admProcedimientos.php');
+        
+        }else {
+           echo "MAL";
         }
         break;
 

@@ -1,10 +1,7 @@
 <?php
     require_once("vendor/autoload.php");
-    $listaConsultorio = Mattias\Dentista\Consultorio::listar(new Mattias\Dentista\Mysql());
     $listaHorarios = Mattias\Dentista\Horarios::listar(new Mattias\Dentista\Mysql());
-    
-    $listaPacientes = Mattias\Dentista\Paciente::listar(new Mattias\Dentista\Mysql());
-    // var_dump($listaConsultorio);
+    $listaConsultorioHorario = Mattias\Dentista\Consultorio::listarConsultorio_Horario(new Mattias\Dentista\Mysql());
 ?>
 <!--uwu -->
 <!DOCTYPE html>
@@ -59,15 +56,16 @@
                     <button type="submit" name="btn" value="Guardar" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
+
             <div class="lista_citas">
                 <div class="lista_citas_title">
                     <h3>Consultorios</h3>
                 </div>
-                <?php foreach ($listaConsultorio as $paciente) { ?>
+                <?php foreach ($listaConsultorioHorario as $consultorio) { ?>
                     <div class="mb-3 cita_item">
                         <div class="row">
                             <div class="col-6 cita_item_title">
-                                <h3>Consultorio <?= $paciente->getId()?></h3>
+                                <h3>Consultorio <?= $consultorio->id?></h3>
                             </div>
                             <div class="col-6 cita_item_icons">
                                 <button type="button" class="button-editar" data-bs-toggle="modal"
@@ -87,7 +85,7 @@
                                         <h4>Direccion</h4>
                                     </div>
                                     <div class="cita_item_body_item_content">
-                                        <?= $paciente->getDireccion()?>
+                                        <?= $consultorio->direccion?>
                                     </div>
                                 </div>
                                 <div class="cita_item_body_item">
@@ -95,7 +93,7 @@
                                         <h4>Horarios</h4>
                                     </div>
                                     <div class="cita_item_body_item_content">
-                                        <p><?= $paciente->getHorarios()?></p>
+                                        <p><?= $consultorio->dias?> | <?= $consultorio->horas?></p>
                                     </div>
                                 </div>
                             </div>

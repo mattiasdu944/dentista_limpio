@@ -21,6 +21,18 @@ class Consultorio
         return $sentencia->fetchAll(); 
     }
 
+    public static function listarConsultorio_Horario(Db $db)
+    {
+        $c = $db->getConexion();
+        $sql = "SELECT c.id, c.direccion, c.horarios, h.dias, h.horas FROM consultorio as c INNER JOIN horarios as h ON c.id = h.id";
+        $sentencia = $c->prepare($sql);
+        $sentencia->execute();
+        $sentencia->setFetchMode(\PDO::FETCH_OBJ);
+        return $sentencia->fetchAll(); 
+    }
+
+
+
     public function insertar(Db $db)
     {
         $c = $db->getConexion();

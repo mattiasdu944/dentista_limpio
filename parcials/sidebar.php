@@ -98,8 +98,8 @@ i{
 
 /*=============== NAV ===============*/
 .container {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: auto;
+  max-width: 85%;
 }
 
 .section {
