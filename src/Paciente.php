@@ -16,7 +16,7 @@ class Paciente
     }
     public static function listar(Db $db){
         $c = $db->getConexion();
-        $sql = "SELECT * FROM pacientes ORDER BY paterno";
+        $sql = "SELECT * FROM pacientes ORDER BY paterno"; 
         $sentecia = $c->prepare($sql);
         $sentecia->execute();
         $sentecia->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,'Mattias\Dentista\Paciente',array(null,null,null,null,null,null,null));
@@ -52,11 +52,13 @@ class Paciente
         
         
     }
-    public function eliminar(Db $db){
+
+    public function eliminar(Db $db)
+    {
         $c = $db->getConexion();
         $sql = "DELETE FROM pacientes WHERE ci = :ci";
         $sentencia = $c->prepare($sql);
-        $sentencia->bindValue(':ci',$this->ci);
+        $sentencia->bindParam(':ci',$this->ci);
         return $sentencia->execute();
     }
     

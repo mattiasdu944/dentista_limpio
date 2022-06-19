@@ -2,7 +2,6 @@
     require_once("vendor/autoload.php");
     $listaProcedimientos = Mattias\Dentista\Procedimiento::listar(new Mattias\Dentista\Mysql());
     $listaConsultorio = Mattias\Dentista\Consultorio::listar(new Mattias\Dentista\Mysql());
-    // var_dump($listaConsultorio);
 ?>
 <!--uwu -->
 <!DOCTYPE html>
@@ -38,12 +37,12 @@
                         <div class="col-12 col-md-6  mb-3">
                             <label for="dirConsultorio" class="form-label">Direccion/s</label>
                             <input type="text" class="form-control" name="dirConsultorio" id="dirConsultorio"
-                                aria-describedby="helpId" placeholder="Ingresa tu nombre">
+                                aria-describedby="helpId" placeholder="Ingresa la direccion">
                         </div>
                         <div class="col-12 col-md-6  mb-3">
                             <label for="horasConsultorio" class="form-label">Horarios</label>
                             <input type="text" class="form-control" name="horasConsultorio" id="horasConsultorio"
-                                aria-describedby="helpId" placeholder="Ingresa tu CI">
+                                aria-describedby="helpId" placeholder="Ingresa los horarios">
                         </div>
                     </div>
                     <div class="mb-3">

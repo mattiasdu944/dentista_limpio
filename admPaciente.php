@@ -27,13 +27,87 @@
             </p>
         </div>
         <hr>
-        <div class="d-flex">
-            <p><span class="special_text big-text"><?=count($listaPacientes)?></span> Pacientes</p>
-            
-            
-        </div>
-        <div class="scroll">
+        <div class="">
+            <p><span class="special_text big-text">
+                    <?=count($listaPacientes)?>
+                </span> Pacientes</p>
 
+            <!-- Button Agregar Paciente -->
+            <button type="button" class="d-flex btn_paciente btn-xs special_text" data-bs-toggle="modal"
+                data-bs-target="#modelId">
+                <i class="uil uil-plus"></i> Agregar Paciente
+            </button>
+
+            <!-- Modal Agregar Paciente -->
+            <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Agregar Paciente</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="ctrlPaciente.php" method="POST">
+                                <div class="row">
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="pacNombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" name="pacNombre" id="pacNombre"
+                                            aria-describedby="helpId" placeholder="Ingresa tu Nombre">
+                                    </div>
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="pacCI" class="form-label">CI</label>
+                                        <input type="text" class="form-control" name="pacCI" id="pacCI"
+                                            aria-describedby="helpId" placeholder="Ingresa tu CI">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="pacPaterno" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" name="pacPaterno" id="pacPaterno"
+                                            aria-describedby="helpId">
+                                    </div>
+                                    <div class="col-12 col-md-6  mb-3 ">
+                                        <label for="pacMaterno" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" name="pacMaterno" id="pacMaterno"
+                                            aria-describedby="helpId">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="pacEdad" class="form-label">Edad</label>
+                                        <input type="number" class="form-control" name="pacEdad" id="pacEdad">
+                                    </div>
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="pacTelefono" class="form-label">Telefono</label>
+                                        <input type="number" max="99999999" class="form-control" name="pacTelefono"
+                                            id="pacTelefono" aria-describedby="helpId">
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="pacCorreo" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" name="pacCorreo" id="pacCorreo"
+                                        aria-describedby="helpId">
+                                </div>
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" value="Guardar" name="btn" class="btn btn-primary">Guardar Paciente</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <?php
+            if(count($listaPacientes)> 0){
+        ?>
+        <div class="scroll">
             <table class="table">
                 <thead>
                     <tr>
@@ -73,7 +147,11 @@
                             <i class="uil uil-pen"></i>
                         </button>
                         <button type="button" class="button-borrar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#eliminarPaciente"
+                            data-id="<?= $paciente->getCi()?>"
+                            data-nombre = "<?= $paciente->getNombres()?>"
+                            onclick="eliminarPaciente(event)"
+                            >
                             <i class="uil uil-trash-alt"></i>
                         </button>
                     </td>
@@ -82,7 +160,9 @@
                 </tbody>
             </table>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- MODAL MODIFICAR PACIENTE -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -100,7 +180,40 @@
                 </div>
             </div>
 
+            <!-- MODAL ELIMINAR PACIENTE-->
+            <div class="modal fade" id="eliminarPaciente" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="ctrlPaciente.php" method="POST">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Paciente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden"  name="elimPacCI" id="elimPacCI">
+                                <p>¿Esta seguro de eliminar al paciente <span id="nombrePaciente"></span>?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" value="Eliminar" name="btn" class="btn btn-primary">Eliminar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <?php
+        }else{
+        ?>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">No hay pacientes registrados</h4>
+            <p>Para registrar un paciente, presione el boton de agregar paciente</p>
+        </div>
+        <?php
+        }?>
     </main>
 
 
@@ -109,17 +222,19 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .big-text{
+        .big-text {
             font-size: 2rem;
             font-weight: bold;
         }
 
-        .pacientes_title h1{
+        .pacientes_title h1 {
             font-weight: bold;
-        }	
-        .special_text{
+        }
+
+        .special_text {
             color: hsl(228, 81%, 49%);
         }
+
         .scroll {
             overflow-x: auto;
             background-color: white;
@@ -139,8 +254,8 @@
                 max-width: 90%;
             }
         }
-            
-        
+
+
         td {
             color: hsl(228, 8%, 50%);
         }
@@ -148,11 +263,18 @@
         i {
             cursor: pointer;
             display: flex;
+            align-items: center;
         }
 
         button {
             border: none;
             background-color: transparent;
+        }
+
+        .btn_paciente {
+            gap: .1rem;
+            align-items: center;
+            margin: .7rem 0;
         }
 
         .button-editar {
@@ -182,6 +304,15 @@
         }
     </style>
     <script src="./Javascript/bootstrap.min.js"></script>
+    <script>
+        const eliminarPaciente = (e) =>{
+            const id = e.currentTarget.dataset.id;
+            const nombre = e.currentTarget.dataset.nombre;
+
+            document.getElementById('nombrePaciente').innerHTML = nombre;
+            document.getElementById('elimPacCI').value = id;
+        }
+    </script>
 </body>
 
 

@@ -30,7 +30,6 @@
             
             <p><span class="special_text big-text"><?=count($listaProcedimientos)?></span> Procedimiento</p>
             
-            
         </div>
         <div class="scroll">
 

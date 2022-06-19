@@ -1,5 +1,8 @@
 <?php
     require_once("vendor/autoload.php");
+    $listaProcedimientos = Mattias\Dentista\Procedimiento::listar(new Mattias\Dentista\Mysql());
+    $listaConsultorio = Mattias\Dentista\Consultorio::listar(new Mattias\Dentista\Mysql());
+    $listaPaciente = Mattias\Dentista\Paciente::listar(new Mattias\Dentista\Mysql());
 ?>
 <!--uwu -->
 <!DOCTYPE html>
@@ -128,7 +131,7 @@
                     <h3>Agendar Cita</h3>
                 </div>
                 <form action="ctrlCitas.php" method="POST">
-                    <div class="row">
+                    <!-- <div class="row">
 
                         <div class="col-12 col-md-6  mb-3">
                             <label for="pacNombre" class="form-label">Nombre/s</label>
@@ -166,6 +169,39 @@
                     <div class="mb-3">
                         <label for="pacCorreo" class="form-label">Correo</label>
                         <input type="email" class="form-control" name="pacCorreo" id="pacCorreo" aria-describedby="helpId">
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="procConsultorio" class="form-label">Pacientes</label>
+                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio"
+                            aria-label="Default select example">
+                            <?php foreach ($listaPaciente as $paciente) { ?>
+                            <option value="<?= $paciente->getCi()?>">
+                                <?= $paciente->getNombres(); ?> <?= $paciente->getPaterno(); ?> <?= $paciente->getMaterno(); ?>
+                            </option>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="procConsultorio" class="form-label">Procedimiento</label>
+                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio"
+                            aria-label="Default select example">
+                            <?php foreach ($listaProcedimientos as $procedimiento) { ?>
+                            <option value="<?= $procedimiento->getId()?>">
+                                <?= $procedimiento->getTipo_procedimiento(); ?>
+                            </option>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="procConsultorio" class="form-label">Direccion del Consultorio</label>
+                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio"
+                            aria-label="Default select example">
+                            <?php foreach ($listaConsultorio as $consultorio) { ?>
+                            <option value="<?= $consultorio->getId()?>">
+                                <?= $consultorio->getDireccion(); ?>
+                            </option>
+                            <?php }?>
+                        </select>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6  mb-3 ">
@@ -178,26 +214,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="dirConsultorio" class="form-label">Direccion Consultorio</label>
-                        <select class="mb-3 form-select" name="dirConsultorio" id="dirConsultorio" aria-label="Default select example">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="procConsultorio" class="form-label">Procedimiento</label>
-                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio" aria-label="Default select example">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-                    <!-- <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div> -->
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
