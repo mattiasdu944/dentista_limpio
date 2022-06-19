@@ -26,11 +26,51 @@
             </p>
         </div>
         <hr>
-        <div class="d-flex">
             
             <p><span class="special_text big-text"><?=count($listaProcedimientos)?></span> Procedimiento</p>
-            
-        </div>
+            <button type="button" class="mb-3 d-flex btn_paciente btn-xs special_text" data-bs-toggle="modal"
+                data-bs-target="#modelProcedimiento">
+                <i class="uil uil-plus"></i> Agregar Procedimiento
+            </button>
+
+            <!-- Modal Agregar Paciente -->
+            <div class="modal fade" id="modelProcedimiento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Agregar Procedimiento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="ctrlProcedimiento.php" method="POST">
+                                <div class="  mb-3">
+                                    <label for="tipoProcedimiento" class="form-label">Tipo de Procedimiento</label>
+                                    <input type="text" class="form-control" name="tipoProcedimiento" id="tipoProcedimiento"
+                                        aria-describedby="helpId" placeholder="Ingresa tu Nombre">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="costoProcedimiento" class="form-label">Costo promedio del procedimiento</label>
+                                    <input type="number" class="form-control" name="costoProcedimiento" id="costoProcedimiento"
+                                        aria-describedby="helpId">
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" name="statusProcedimiento" id="statusProcedimiento" value="checkedValue" checked>
+                                    <label class="form-check-label" for="statusProcedimiento">
+                                      Estado
+                                    </label>
+                                </div>
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" value="Guardar" name="btn" class="btn btn-primary">Guardar Procedimiento</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
         <div class="scroll">
 
             <table class="table">
@@ -69,7 +109,7 @@
                 </tr>
                 <?php } ?>
                 </tbody>
-            </table>
+            </table> 
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

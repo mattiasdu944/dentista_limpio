@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="./Css/bootstrap.min.css">
     <title>Lista de Pacientes</title>
-</head>
+</head> 
 
 <body>
     <?php include('parcials/sidebar.php');?>
@@ -27,19 +27,18 @@
             </p>
         </div>
         <hr>
-        <div class="">
             <p><span class="special_text big-text">
                     <?=count($listaPacientes)?>
                 </span> Pacientes</p>
 
             <!-- Button Agregar Paciente -->
             <button type="button" class="d-flex btn_paciente btn-xs special_text" data-bs-toggle="modal"
-                data-bs-target="#modelId">
+                data-bs-target="#modelPaciente">
                 <i class="uil uil-plus"></i> Agregar Paciente
             </button>
 
             <!-- Modal Agregar Paciente -->
-            <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            <div class="modal fade" id="modelPaciente" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -103,7 +102,6 @@
                 </div>
             </div>
 
-        </div>
         <?php
             if(count($listaPacientes)> 0){
         ?>

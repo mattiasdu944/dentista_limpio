@@ -3,13 +3,12 @@ namespace Mattias\Dentista;
 
 class Consultorio
 {
-    private $id,$direccion,$horarios,$procedimiento;
-    public function __construct($direccion,$horarios,$procedimiento,$id=null)
+    private $id,$direccion,$horarios;
+    public function __construct($direccion,$horarios,$id=null)
     {
         $this->id=$id;      
         $this->direccion=$direccion;
         $this->horarios=$horarios;
-        $this->procedimiento=$procedimiento;
     }
 
     public static function listar(Db $db)
@@ -18,19 +17,17 @@ class Consultorio
         $sql = "SELECT * FROM consultorio";
         $sentencia = $c->prepare($sql);
         $sentencia->execute();
-        $sentencia->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,'Mattias\Dentista\Consultorio',array(null,null,null,null,null));
+        $sentencia->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,'Mattias\Dentista\Consultorio',array(null,null,null));
         return $sentencia->fetchAll(); 
     }
 
     public function insertar(Db $db)
     {
         $c = $db->getConexion();
-        $sql = "INSERT INTO consultorio (direccion, horarios, procedimiento) VALUES(:direccion, :horarios, :procedimineto)";
+        $sql = "INSERT INTO consultorio (direccion, horarios) VALUES(:direccion, :horarios)";
         $sentencia = $c->prepare($sql);
         $sentencia->bindValue(":direccion",$this -> direccion);
         $sentencia->bindValue(":horarios" ,$this->horarios);
-        $sentencia->bindValue(":procedimiento" ,$this->procedimiento);
-        //$sentencia->bindValue(":id",$this->id);
         return $sentencia->execute();
     }
 

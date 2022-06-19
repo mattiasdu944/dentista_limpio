@@ -8,7 +8,7 @@ class Paciente
         $this->ci = $ci;
         $this->nombres = $nombres;
         $this->paterno = $paterno;
-        $this->materno = $materno;
+        $this->materno = $materno; 
         $this->correo = $correo;
         $this->telefono = $telefono;
         $this->edad = $edad;

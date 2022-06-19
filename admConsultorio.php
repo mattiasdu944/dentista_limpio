@@ -1,7 +1,10 @@
 <?php
     require_once("vendor/autoload.php");
-    $listaProcedimientos = Mattias\Dentista\Procedimiento::listar(new Mattias\Dentista\Mysql());
     $listaConsultorio = Mattias\Dentista\Consultorio::listar(new Mattias\Dentista\Mysql());
+    $listaHorarios = Mattias\Dentista\Horarios::listar(new Mattias\Dentista\Mysql());
+    
+    $listaPacientes = Mattias\Dentista\Paciente::listar(new Mattias\Dentista\Mysql());
+    // var_dump($listaConsultorio);
 ?>
 <!--uwu -->
 <!DOCTYPE html>
@@ -26,101 +29,82 @@
             </p>
         </div>
         <hr>
-        <setion class="section main grid">
+        <section class="section main grid">
             <div class="form_citas">
                 <div class="form_citas_title">
                     <h3>Agregar Consultorio</h3>
                 </div>
-                <form action="ctrlCitas.php" method="POST">
-                    <div class="row">
+                <form action="ctrlConsultorio.php" method="POST">
 
-                        <div class="col-12 col-md-6  mb-3">
-                            <label for="dirConsultorio" class="form-label">Direccion/s</label>
-                            <input type="text" class="form-control" name="dirConsultorio" id="dirConsultorio"
-                                aria-describedby="helpId" placeholder="Ingresa la direccion">
-                        </div>
-                        <div class="col-12 col-md-6  mb-3">
-                            <label for="horasConsultorio" class="form-label">Horarios</label>
-                            <input type="text" class="form-control" name="horasConsultorio" id="horasConsultorio"
-                                aria-describedby="helpId" placeholder="Ingresa los horarios">
-                        </div>
+
+                    <div class="  mb-3">
+                        <label for="dirConsultorio" class="form-label">Direccion/s</label>
+                        <input type="text" class="form-control" name="dirConsultorio" id="dirConsultorio"
+                            aria-describedby="helpId" placeholder="Ingresa la direccion">
                     </div>
                     <div class="mb-3">
-                        <label for="procConsultorio" class="form-label">Procedimientos</label>
-                        <select class="mb-3 form-select" name="procConsultorio" id="procConsultorio"
+                        <label for="horarioConsultorio" class="form-label">Dias y Horarios</label>
+                        <select class="mb-3 form-select" name="horarioConsultorio" id="horarioConsultorio"
                             aria-label="Default select example">
-                            <?php foreach ($listaProcedimientos as $procedimiento) { ?>
-                            <option value="<?= $procedimiento->getId()?>">
-                                <?= $procedimiento->getTipo_procedimiento(); ?>
+                            <?php foreach ($listaHorarios as $horario) { ?>
+                            <option value="<?= $horario->getId()?>">
+                                <?= $horario->getDias()?>
+                                <?= $horario->getHoras()?>
                             </option>
                             <?php }?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                    <button type="submit" name="btn" value="Guardar" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
             <div class="lista_citas">
                 <div class="lista_citas_title">
                     <h3>Consultorios</h3>
                 </div>
-                <div class="cita_item">
-                    <div class="row">
-                        <div class="col-6 cita_item_title">
-                            <h3>Cita 1</h3>
-                        </div>
-                        <div class="col-6 cita_item_icons">
-                            <button type="button" class="button-editar" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class="uil uil-pen"></i>
-                            </button>
-                            <button type="button" class="button-borrar" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class="uil uil-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="cita_item_body">
-                        <div class="row mb-3">
-                            <div class="col-12 col-md-6  cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Nombre Completo</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>Mattias Alexandre Duarte Aparicio</p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6  cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Telefono</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>76290741</p>
-                                </div>
-                            </div>
-                        </div>
+                <?php foreach ($listaConsultorio as $paciente) { ?>
+                    <div class="mb-3 cita_item">
                         <div class="row">
-                            <div class="col-12 col-md-6  cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Consultorio</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>Los Andes</p>
-                                </div>
+                            <div class="col-6 cita_item_title">
+                                <h3>Consultorio <?= $paciente->getId()?></h3>
                             </div>
-                            <div class="col-12 col-md-6 cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Fecha y Hora</h4>
+                            <div class="col-6 cita_item_icons">
+                                <button type="button" class="button-editar" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    <i class="uil uil-pen"></i>
+                                </button>
+                                <button type="button" class="button-borrar" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    <i class="uil uil-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="cita_item_body">
+                            <div class="row mb-3">
+                                <div class="mb-3 cita_item_body_item">
+                                    <div class="cita_item_body_item_title">
+                                        <h4>Direccion</h4>
+                                    </div>
+                                    <div class="cita_item_body_item_content">
+                                        <?= $paciente->getDireccion()?>
+                                    </div>
                                 </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>19 de mayo 18:00pm</p>
+                                <div class="cita_item_body_item">
+                                    <div class="cita_item_body_item_title">
+                                        <h4>Horarios</h4>
+                                    </div>
+                                    <div class="cita_item_body_item_content">
+                                        <p><?= $paciente->getHorarios()?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                
+                <?php } ?>
             </div>
-            </section>
+        </section>
     </main>
 
 
@@ -209,9 +193,6 @@
             color: hsl(0, 100%, 61%);
         }
     </style>
-
-
-
     <script src="./Javascript/bootstrap.min.js"></script>
 </body>
 
