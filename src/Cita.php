@@ -54,6 +54,14 @@ class Cita
         return $sentencia->fetchAll();
     }
 
+    public function eliminar(Db $db)
+    {
+        $c = $db->getConexion();
+        $sql = "DELETE FROM citas WHERE id = :id";
+        $sentencia = $c->prepare($sql);
+        $sentencia->bindParam(':id',$this->id);
+        return $sentencia->execute();
+    }
     /**
      * Get the value of fecha
      */ 

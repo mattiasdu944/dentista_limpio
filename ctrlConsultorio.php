@@ -20,25 +20,35 @@ switch ($op) {
         break;
 
     case 'Modificar':
-        break;
-
-    case 'Eliminar':
-
-        $id = $_POST['elimPacCI'];
-
-        $user = new Mattias\Dentista\Paciente($id,null,null,null,null,null,null);
-
-        if ($user->eliminar(new Mattias\Dentista\Mysql())) {
-            header('Location:admPaciente.php');
+    
+ 
+        $consul = new Mattias\Dentista\Consultorio(
+            $_POST['modDireccion'],
+            $_POST['modHorarioConsultorio'],
+            $_POST["modIdConsultorio"],
+        );
+        if ($consul->modificar(new Mattias\Dentista\Mysql())) {
+            header('Location:admConsultorio.php');
         }
         else {
             echo "MAL";
         }
         break;
 
+    case 'Eliminar':
+        var_dump($_POST);
+        $id = $_POST['elimConsulId'];
 
-    
-    
+        $user = new Mattias\Dentista\Consultorio(null,null,$id);
+
+        if ($user->eliminar(new Mattias\Dentista\Mysql())) {
+            header('Location:admConsultorio.php');
+        }
+        else {
+            echo "MAL";
+        }
+        break;
+
     default:
         break;
 }

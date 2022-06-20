@@ -24,32 +24,19 @@ switch ($op) {
 
 
     case 'Modificar':
-        if (is_uploaded_file($_FILES['mimgProdNew']['tmp_name'])) {
-            // CREA EL NOMBRE DEL ARCHIVO
-            $nom = $_FILES["mimgProdNew"]["name"];
-            $dir = 'img/'.time().$nom;
-            //GUARDA LA IMAGEN EN EL DIRECTORIO
-            move_uploaded_file($_FILES['mimgProdNew']['tmp_name'],$dir);
-        }
         
-        else{
-            $dir= $_POST['mImgProdActual'];
-        }
 
-        $state = isset($_POST["mStatusProd"]) ? 1 : 0;
-        echo $state;
-        $prod = new Mattias\Inventario2022\Producto(
-            $_POST["mnomProd"],
-            $_POST['mMarcaProd'],
-            $dir,
-            $_POST['mprecioProd'],
+        $state = isset($_POST["statusProcedimiento"]) ? 1 : 0;
+        var_dump($_POST);
+
+        $prod = new Mattias\Dentista\Procedimiento(
+            $_POST["modProcedimiento"],
             $state,
-            $_POST['mStockProd'],
-            $_POST['mIdcProd'],
-            $_POST['mIdProd'],
+            $_POST['modCosto'],
+            $_POST['modId']
         );
-        if ($prod->modificar(new Mattias\Inventario2022\Mysql())) {
-            header('Location:admProducto.php');
+        if ($prod->modificar(new Mattias\Dentista\Mysql())) {
+            header('Location:admProcedimientos.php');
         }
         else {
             echo "MAL";

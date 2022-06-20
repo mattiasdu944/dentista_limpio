@@ -3,12 +3,12 @@ namespace Mattias\Dentista;
 
 class Consultorio
 {
-    private $id,$direccion,$horarios;
+    private $direccion,$horarios,$id;
     public function __construct($direccion,$horarios,$id=null)
     {
-        $this->id=$id;      
         $this->direccion=$direccion;
         $this->horarios=$horarios;
+        $this->id=$id;      
     }
 
     public static function listar(Db $db)
@@ -21,16 +21,15 @@ class Consultorio
         return $sentencia->fetchAll(); 
     }
 
-    public static function listarConsultorio_Horario(Db $db)
+    public static function listarJoin(Db $db)
     {
         $c = $db->getConexion();
-        $sql = "SELECT c.id, c.direccion, c.horarios, h.dias, h.horas FROM consultorio as c INNER JOIN horarios as h ON c.id = h.id";
+        $sql = "SELECT c.id, c.direccion, c.horarios, h.dias, h.horas FROM consultorio as c INNER JOIN horarios as h ON c.horarios = h.id";
         $sentencia = $c->prepare($sql);
         $sentencia->execute();
         $sentencia->setFetchMode(\PDO::FETCH_OBJ);
-        return $sentencia->fetchAll(); 
+        return $sentencia->fetchAll();
     }
-
 
 
     public function insertar(Db $db)
@@ -46,11 +45,10 @@ class Consultorio
     public function modificar(Db $db)
     {
         $c = $db->getConexion();
-        $sql = "UPDATE dentista SET  direccion = :direccion ,horarios=:horarios, procedimiento = :procedimiento WHERE id = :id";
+        $sql = "UPDATE consultorio SET  direccion = :direccion ,horarios=:horarios WHERE id = :id";
         $sentencia = $c->prepare($sql);
         $sentencia->bindValue(":direccion",$this -> direccion);
         $sentencia->bindValue(":horarios" ,$this->horarios);
-        $sentencia->bindValue(":procedimiento" ,$this->procedimiento);
         $sentencia->bindValue(":id",$this->id);
         return $sentencia->execute();
     }

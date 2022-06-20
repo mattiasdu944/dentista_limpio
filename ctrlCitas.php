@@ -25,12 +25,12 @@ switch ($op) {
     case 'Modificar':
         break;
 
-        
+
     case 'Eliminar':
+        $id = $_POST['elimCitaId'];
+        echo $id;
 
-        $id = $_POST['elimPacCI'];
-
-        $user = new Mattias\Dentista\Paciente($id,null,null,null,null,null,null);
+        $user = new Mattias\Dentista\Cita(null,null,null,null,null,$id);
 
         if ($user->eliminar(new Mattias\Dentista\Mysql())) {
             header('Location:admCitas.php');
@@ -40,9 +40,6 @@ switch ($op) {
         }
         break;
 
-
-    
-    
     default:
         echo"no se realizo ninguna accion";
         break;

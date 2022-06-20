@@ -38,7 +38,7 @@ class Procedimiento{
         return $sentencia->fetchAll();
     }
 
-        // LISTAR ELEMENTOS DE BD
+    // LISTAR ELEMENTOS DE BD
     public static function listarActivos(Db $db)
     {
         $c = $db->getConexion();
@@ -49,6 +49,18 @@ class Procedimiento{
         return $sentencia->fetchAll();
     }
 
+    public function modificar(Db $db)
+    {
+        $c = $db->getConexion();
+        $sql = "UPDATE procedimiento SET tipo_procedimiento = :tipo_procedimiento, estado = :estado , costo = :costo WHERE id = :id";
+        $sentencia = $c->prepare($sql);
+        $sentencia->bindValue(":tipo_procedimiento",$this->tipo_procedimiento);
+        $sentencia->bindValue(":estado",$this->estado);
+        $sentencia->bindValue(":costo",$this->costo);
+        $sentencia->bindValue(":id",$this->id);
+        return $sentencia->execute();
+    }
+    
     public function eliminar(Db $db)
     {
         $c = $db->getConexion();

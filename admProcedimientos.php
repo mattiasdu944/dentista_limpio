@@ -105,7 +105,14 @@
 
                         <!-- BOTON EDITAR -->
                         <button type="button" class="button-editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#modProcedimientoModal"
+                            
+                            data-id="<?php echo $procedimiento->getId()?>"
+                            data-tipo="<?php echo $procedimiento->getTipo_procedimiento()?>"
+                            data-costo="<?php echo $procedimiento->getCosto()?>"
+                            data-status="<?php echo $procedimiento->getEstado()?>"
+                            onclick="modificarProcedimiento(event)"
+                        >
                             <i class="uil uil-pen"></i>
                         </button>
 
@@ -149,6 +156,54 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" value="Eliminar" name="btn" class="btn btn-primary">Eliminar</button>
                             </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL MODIFICAR PROCEDIMIENTO -->
+            <div class="modal fade" id="modProcedimientoModal" tabindex="-1" aria-labelledby="modProcedimientoModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="ctrlProcedimiento.php" method="POST">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Paciente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <!-- fomrmulario de insercion de categorias -->
+                                <form action="ctrlProcedimientos.php" method="POST">
+                                    <input type="hidden" name="modId" id="modId">
+
+                                    <div class="mb-3">
+                                        <label for="modProcedimiento" class="form-label">Procedimiento</label>
+                                        <input type="text" class="form-control" name="modProcedimiento" id="modProcedimiento"
+                                            aria-describedby="helpId" placeholder="Tipo de Procedimiento" require>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="modCosto" class="form-label">Costo</label>
+                                        <input type="number" class="form-control" name="modCosto" id="modCosto" placeholder="Ingrese el costo" require
+                                            aria-describedby="HelpId" require>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="statusProcedimiento" id="statusProcedimiento" value="checkedValue" checked>
+                                        <label class="form-check-label" for="statusProcedimiento">
+                                            Estado
+                                        </label>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" value="Modificar" name="btn" class="btn btn-primary">Modificar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -238,12 +293,34 @@
     
     <script src="./Javascript/bootstrap.min.js"></script>
     <script>
+        // ELIMINACION DE UN PROCEDIMIENTO
         const eliminarProcedimiento = (e) =>{
             const id = e.currentTarget.dataset.id;
             const procedimiento = e.currentTarget.dataset.procedimiento;
 
             document.getElementById('procedimiento').innerHTML = procedimiento;
             document.getElementById('elimProcId').value = id;
+        }
+
+        // MODIFICACION DE UN PROCEDIMIENTO
+        function modificarProcedimiento(e){
+            const procedimiento = document.getElementById('modProcedimiento');
+            const costo = document.getElementById('modCosto');
+            const status = document.getElementById('statusProcedimiento');
+            const id = document.getElementById('modId');
+            
+            procedimiento.value = e.currentTarget.dataset.tipo;
+            costo.value = e.currentTarget.dataset.costo;
+            id.value = e.currentTarget.dataset.id;
+            
+            if( e.currentTarget.dataset.status == '1'){
+                status.checked = true;
+                console.log(status.checked);
+            }
+            else{
+                status.checked = false;
+                console.log(status.checked);
+            }
         }
     </script>
 </body>

@@ -83,7 +83,7 @@
                         <div class="col-12 col-md-6  mb-3 ">
                             <label for="citaHora" class="form-label">Hora de la Cita</label>
                             <input type="time" class="form-control" name="citaHora" id="citaHora" min="<?=$Time?>"
-                                max="19:00" aria-describedby="helpId" required>
+                                aria-describedby="helpId" required>
                         </div>
                     </div>
 
@@ -95,115 +95,118 @@
                     <h3>Lista de Citas</h3>
                 </div>
 
-                <?php 
-                    $contador=0;
-                    foreach(array_reverse($listaCitas) as $cita){
-                        $contador++;
-                ?>
-                <div class="cita_item mb-3">
-                    <div class="row">
-                        <div class="col-6 cita_item_title">
-                            <h3>Cita
-                                <?php echo $contador?>
-                            </h3>
-                        </div>
-                        <div class="col-6 cita_item_icons">
-                            <button type="button" class="button-editar" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <i class="uil uil-pen"></i>
-                            </button>
-                            <button type="button" class="button-borrar" 
-                                data-bs-toggle="modal"
-                                data-bs-target="#elimCitaModal"
-                                data-id="<?=$cita->gId?>"
-                                onclick="eliminarCita(event)"
-                                >
-                                
-                                <i class="uil uil-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="cita_item_body">
-                        <div class="cita_item_body_item">
-                            <div class="cita_item_body_item_title">
-                                <h4>Nombre Completo</h4>
-                            </div>
-                            <div class="cita_item_body_item_content">
-                                <p>
-                                    <?=$cita->nombres?>
-                                    <?=$cita->paterno?>
-                                    <?=$cita->materno?>
-                                </p>
-                            </div>
-                        </div>
-                        <div class=" cita_item_body_item">
-                            <div class="cita_item_body_item_title">
-                                <h4>Consultorio</h4>
-                            </div>
-                            <div class=" cita_item_body_item_content">
-                                <p>
-                                    <?=$cita->direccion?>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6  cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Procedimiento a realizar</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>
-                                        <?=$cita->tipo_procedimiento?>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6  cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Telefono</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>
-                                        <?=$cita->telefono?>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="scroll_citas">
+                    <?php 
+                        $contador=0;
+                        foreach(array_reverse($listaCitas) as $cita){
+                            $contador++;
+                    ?>
 
-
-                        <div class="row">
-
-
-                            <div class="col-12 col-md-6 cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Fecha</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p id="fechaCita">
-                                        <?=$cita->fecha?>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 cita_item_body_item">
-                                <div class="cita_item_body_item_title">
-                                    <h4>Hora</h4>
-                                </div>
-                                <div class="cita_item_body_item_content">
-                                    <p>
-                                        <?=$cita->hora_atencion?>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php }?>
                 
+                    <div class="cita_item mb-3">
+                        <div class="row">
+                            <div class="col-6 cita_item_title">
+                                <h3>Cita
+                                    <?php echo $contador?>
+                                </h3>
+                            </div>
+                            <div class="col-6 cita_item_icons">
+                                <button type="button" class="button-editar" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    <i class="uil uil-pen"></i>
+                                </button>
+                                <button type="button" class="button-borrar" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#elimCitaModal"
+                                    data-id="<?=$cita->id?>"
+                                    onclick="eliminarCita(event)"
+                                    >
+                                    
+                                    <i class="uil uil-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="cita_item_body">
+                            <div class="cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Nombre Completo</h4>
+                                </div>
+                                <div class="cita_item_body_item_content">
+                                    <p>
+                                        <?=$cita->nombres?>
+                                        <?=$cita->paterno?>
+                                        <?=$cita->materno?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class=" cita_item_body_item">
+                                <div class="cita_item_body_item_title">
+                                    <h4>Consultorio</h4>
+                                </div>
+                                <div class=" cita_item_body_item_content">
+                                    <p>
+                                        <?=$cita->direccion?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6  cita_item_body_item">
+                                    <div class="cita_item_body_item_title">
+                                        <h4>Procedimiento a realizar</h4>
+                                    </div>
+                                    <div class="cita_item_body_item_content">
+                                        <p>
+                                            <?=$cita->tipo_procedimiento?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6  cita_item_body_item">
+                                    <div class="cita_item_body_item_title">
+                                        <h4>Telefono</h4>
+                                    </div>
+                                    <div class="cita_item_body_item_content">
+                                        <p>
+                                            <?=$cita->telefono?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+
+                                <div class="col-12 col-md-6 cita_item_body_item">
+                                    <div class="cita_item_body_item_title">
+                                        <h4>Fecha</h4>
+                                    </div>
+                                    <div class="cita_item_body_item_content">
+                                        <p id="fechaCita">
+                                            <?=$cita->fecha?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 cita_item_body_item">
+                                    <div class="cita_item_body_item_title">
+                                        <h4>Hora</h4>
+                                    </div>
+                                    <div class="cita_item_body_item_content">
+                                        <p>
+                                            <?=$cita->hora_atencion?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }?>
+                </div>
                 <!-- MODAL ELIMINAR CITA-->
                 <div class="modal fade" id="elimCitaModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="ctrlPaciente.php" method="POST">
+                            <form action="ctrlCitas.php" method="POST">
 
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Eliminar Cita</h5>
@@ -312,6 +315,13 @@
             transform: translateY(-2px);
             color: hsl(0, 100%, 61%);
         }
+
+        .scroll_citas{
+            padding:0rem 1rem;
+            height: 70vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
     </style>
 
 
@@ -320,7 +330,7 @@
     <script>
         const eliminarCita = e => {
             const id = e.currentTarget.dataset.id;
-            console.log(id);
+            document.getElementById('elimCitaId').value = id;
         }
     </script>
 </body>
