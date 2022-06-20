@@ -25,6 +25,21 @@ switch ($op) {
         break;
 
     case 'Modificar':
+        $paciente = new Mattias\Dentista\Paciente(
+            $_POST['modPacCI'],
+            $_POST['modPacNombre'],
+            $_POST["modPacPaterno"],
+            $_POST["modPacMaterno"],
+            $_POST["modPacCorreo"],
+            $_POST["modPacTelefono"],
+            $_POST["modPacEdad"]
+        );
+        if ($paciente->modificar(new Mattias\Dentista\Mysql())) {
+            header('Location:admPaciente.php');
+        }
+        else {
+            echo "MAL";
+        }
         break;
 
     case 'Eliminar':

@@ -20,8 +20,7 @@ switch ($op) {
         break;
 
     case 'Modificar':
-    
- 
+
         $consul = new Mattias\Dentista\Consultorio(
             $_POST['modDireccion'],
             $_POST['modHorarioConsultorio'],

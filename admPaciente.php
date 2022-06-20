@@ -141,7 +141,16 @@
                     </td>
                     <td class="table_actions">
                         <button type="button" class="button-editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#exampleModal"
+                            data-ci="<?= $paciente->getCi()?>"
+                            data-nombres="<?= $paciente->getNombres()?>"
+                            data-paterno="<?= $paciente->getPaterno()?>"
+                            data-materno="<?= $paciente->getMaterno()?>"
+                            data-edad="<?= $paciente->getEdad()?>"
+                            data-telefono="<?= $paciente->getTelefono()?>"
+                            data-correo="<?= $paciente->getCorreo()?>"
+                            onclick="modificarPaciente(event)"
+                        >
                             <i class="uil uil-pen"></i>
                         </button>
                         <button type="button" class="button-borrar" data-bs-toggle="modal"
@@ -168,11 +177,55 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <form action="ctrlPaciente.php" method="POST">
+                                <div class="row">
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="modPacNombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" name="modPacNombre" id="modPacNombre"
+                                            aria-describedby="helpId" >
+                                    </div>
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="modPacCI" class="form-label">CI</label>
+                                        <input type="text" class="form-control" name="modPacCI" id="modPacCI"
+                                            aria-describedby="helpId" >
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="modPacPaterno" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" name="modPacPaterno" id="modPacPaterno"
+                                            aria-describedby="helpId">
+                                    </div>
+                                    <div class="col-12 col-md-6  mb-3 ">
+                                        <label for="modPacMaterno" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" name="modPacMaterno" id="modPacMaterno"
+                                            aria-describedby="helpId">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="modPacEdad" class="form-label">Edad</label>
+                                        <input type="number" class="form-control" name="modPacEdad" id="modPacEdad">
+                                    </div>
+                                    <div class="col-12 col-md-6  mb-3">
+                                        <label for="modPacTelefono" class="form-label">Telefono</label>
+                                        <input type="number" max="99999999" class="form-control" name="modPacTelefono"
+                                            id="modPacTelefono" aria-describedby="helpId">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="modPacCorreo" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" name="modPacCorreo" id="modPacCorreo"
+                                        aria-describedby="helpId">
+                                </div>
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" value="Modificar" name="btn" class="btn btn-primary">Modificar Paciente</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -309,6 +362,24 @@
 
             document.getElementById('nombrePaciente').innerHTML = nombre;
             document.getElementById('elimPacCI').value = id;
+        }
+
+        const modificarPaciente= e =>{
+            const ci = document.getElementById('modPacCI');
+            const nombre = document.getElementById('modPacNombre');
+            const edad = document.getElementById('modPacEdad');
+            const telefono = document.getElementById('modPacTelefono');
+            const correo = document.getElementById('modPacCorreo');
+            const paterno = document.getElementById('modPacPaterno');
+            const materno = document.getElementById('modPacMaterno');
+
+            ci.value = e.currentTarget.dataset.ci;
+            nombre.value = e.currentTarget.dataset.nombres;
+            edad.value = e.currentTarget.dataset.edad;
+            telefono.value = e.currentTarget.dataset.telefono;
+            correo.value = e.currentTarget.dataset.correo;
+            paterno.value = e.currentTarget.dataset.paterno;
+            materno.value = e.currentTarget.dataset.materno;
         }
     </script>
 </body>

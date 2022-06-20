@@ -35,7 +35,6 @@ class Paciente
         $sentecia->bindParam(':telefono',$this->telefono);
         $sentecia->bindParam(':edad',$this->edad);
         return $sentecia->execute();
-
     }
     public function modificar(Db $db){
         $c = $db->getConexion();
