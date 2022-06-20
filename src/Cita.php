@@ -62,6 +62,21 @@ class Cita
         $sentencia->bindParam(':id',$this->id);
         return $sentencia->execute();
     }
+
+
+    public function modificar(Db $db){
+        $c = $db->getConexion();
+        $sql = "UPDATE citas SET fecha = :fecha, hora_atencion = :hora_atencion, paciente = :paciente, consultorio = :consultorio, procedimiento = :procedimiento WHERE id = :id";
+        $sentencia = $c->prepare($sql);
+        $sentencia->bindValue(":fecha",$this->fecha);
+        $sentencia->bindValue(":hora_atencion",$this->hora_atencion);
+        $sentencia->bindValue(":paciente",$this->paciente);
+        $sentencia->bindValue(":consultorio",$this->consultorio);
+        $sentencia->bindValue(":procedimiento",$this->procedimiento);
+        $sentencia->bindValue(":id",$this->id);
+        return $sentencia->execute();
+    }
+
     /**
      * Get the value of fecha
      */ 

@@ -1,4 +1,5 @@
 <?php
+    require_once("seguridad.php");
     require_once("vendor/autoload.php");
     $listaHorarios = Mattias\Dentista\Horarios::listar(new Mattias\Dentista\Mysql());
     $listaConsultorioHorario = Mattias\Dentista\Consultorio::listarJoin(new Mattias\Dentista\Mysql());

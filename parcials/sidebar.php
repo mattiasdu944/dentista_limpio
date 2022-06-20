@@ -12,11 +12,28 @@
             <i class="uil uil-arrow-right"></i>
         </div>
 
-        <a href="#" class="nav__logo">
+          <div class="nav__logo">
+
             <img src="./assets/images/logo.png" width="20px" alt="imagen">
-            <span class="nav__logo-name">Dentista</span>
-        </a>
-        <hr>
+            <div class="nav_logo_user">
+
+              <span class="nav__logo-name">
+                <?=$_SESSION['usuario']?>
+              </span>
+              
+              <span class="nav__name">
+                <?php
+                if($_SESSION['rol'] == 1){
+                  echo "Administrador";
+                }else{
+                  echo "Secretario";
+                }
+                ?>
+            </span>
+            <hr>
+          </div>
+            
+        </div>
         <div class="nav__list">
             <a href="./admCitas.php" class="nav__link">
                 <i class="uil uil-file-alt"></i>
@@ -35,6 +52,26 @@
             <a href="./admProcedimientos.php" class="nav__link">
               <i class="uil uil-medkit"></i>
                 <span class="nav__name">Control de Serivcios</span>
+            </a>
+
+            <?php
+            if($_SESSION['rol'] == 1){
+              echo '<a href="./admUsuarios.php" class="nav__link">
+              <i class="uil uil-users-alt"></i>
+                <span class="nav__name">Usuarios</span>
+              </a>';
+            }
+            ?>
+            <!-- <a href="./admUsuarios.php" class="nav__link">
+              <i class="uil uil-users-alt"></i>
+              <span class="nav__name">Usuarios</span>
+            </a> -->
+        </div>
+        <div class="nav__out">
+          <hr>
+            <a href="salir.php" class="nav__link">
+              <i class="uil uil-signout"></i>
+              <span class="nav__name">Salir</span>
             </a>
         </div>
     </nav>
@@ -97,6 +134,11 @@ i{
 }
 
 /*=============== NAV ===============*/
+.nav__content{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .container {
   margin-left: auto;
   max-width: 85%;
@@ -204,7 +246,6 @@ i{
   .nav__list {
     display: grid;
     row-gap: 2.5rem;
-    margin-top: 10.5rem;
   }
   .nav__content {
     overflow: hidden;

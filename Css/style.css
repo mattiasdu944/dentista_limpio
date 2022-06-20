@@ -204,6 +204,10 @@ footer h5{
     justify-content: space-around;
 }
 
+.footer_title{
+    width: 20rem;
+}
+
 
 
 @media screen and (max-width: 992px){

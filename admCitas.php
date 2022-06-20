@@ -1,4 +1,5 @@
 <?php
+    require_once("seguridad.php");
     require_once("vendor/autoload.php");
     $listaProcedimientos = Mattias\Dentista\Procedimiento::listarActivos(new Mattias\Dentista\Mysql());
     $listaConsultorio = Mattias\Dentista\Consultorio::listar(new Mattias\Dentista\Mysql());
@@ -36,7 +37,7 @@
                 <div class="form_citas_title">
                     <h3>Agendar Cita</h3>
                 </div>
-                <form action="ctrlCitas.php" method="POST">
+                <form  class="formulario"action="ctrlCitas.php" method="POST">
                     <div class="mb-3">
                         <label for="citaPaciente" class="form-label">Pacientes</label>
                         <select class="mb-3 form-select" name="citaPaciente" id="citaPaciente"
@@ -83,7 +84,7 @@
                         <div class="col-12 col-md-6  mb-3 ">
                             <label for="citaHora" class="form-label">Hora de la Cita</label>
                             <input type="time" class="form-control" name="citaHora" id="citaHora" min="<?=$Time?>"
-                                aria-describedby="helpId" required>
+                            max="19:00" aria-describedby="helpId" required>
                         </div>
                     </div>
 
@@ -112,7 +113,16 @@
                             </div>
                             <div class="col-6 cita_item_icons">
                                 <button type="button" class="button-editar" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
+                                    data-bs-target="#modificarCita"
+                                    data-id="<?= $cita->id?>"
+                                    data-paciente="<?= $cita->paciente?>"
+                                    data-procedimiento="<?=$cita->procedimiento?>"
+                                    data-consultorio="<?= $cita->consultorio?>"
+                                    data-fecha="<?= $cita->fecha?>"
+                                    data-hora="<?= $cita->hora_atencion?>"
+                                    data-telefono="<?= $cita->telefono?>"
+                                    onclick="modificarCita(event)"
+                                    >
                                     <i class="uil uil-pen"></i>
                                 </button>
                                 <button type="button" class="button-borrar" 
@@ -224,6 +234,80 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- MODAL MODIFICAR PACIENTE -->
+                <div class="modal fade" id="modificarCita" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modificar Cita</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="ctrlCitas.php" method="POST">
+                                    <input type="hidden" name="modId" id="modId">
+
+                                    <div class="mb-3">
+                                        <label for="citaPacmodCitaPacienteiente" class="form-label">Pacientes</label>
+                                        <select class="mb-3 form-select" name="modCitaPaciente" id="modCitaPaciente"
+                                            aria-label="Default select example" required>
+                                            <?php foreach ($listaPaciente as $paciente) { ?>
+                                                <option value="<?= $paciente->getCi()?>">
+                                                    <?= $paciente->getNombres(); ?>
+                                                    <?= $paciente->getPaterno(); ?>
+                                                    <?= $paciente->getMaterno(); ?>
+                                                </option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="modCitaProcedimiento" class="form-label">Procedimiento</label>
+                                        <select class="mb-3 form-select" name="modCitaProcedimiento" id="modCitaProcedimiento"
+                                            aria-label="Default select example" required>
+                                            <?php foreach ($listaProcedimientos as $procedimiento) { ?>
+                                                <option value="<?= $procedimiento->getId()?>">
+                                                    <?= $procedimiento->getTipo_procedimiento(); ?>
+                                                </option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="modCitaConsultorio" class="form-label">Direccion del Consultorio</label>
+                                        <select class="mb-3 form-select" name="modCitaConsultorio" id="modCitaConsultorio"
+                                            aria-label="Default select example" required >
+                                            <?php foreach ($listaConsultorio as $consultorio) { ?>
+                                                <option value="<?= $consultorio->getId()?>">
+                                                    <?= $consultorio->getDireccion(); ?>
+                                                </option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6  mb-3 ">
+                                            <label for="modCitaFecha" class="form-label">Fecha de la Cita</label>
+                                            <input type="date" class="form-control" name="modCitaFecha" id="modCitaFecha" min="<?=$Date?>"
+                                                max="2023-12-31" aria-describedby="helpId" required>
+                                        </div>
+                                        <div class="col-12 col-md-6  mb-3 ">
+                                            <label for="modCitaHora" class="form-label">Hora de la Cita</label>
+                                            <input type="time" class="form-control" name="modCitaHora" id="modCitaHora" min="<?=$Time?>"
+                                                max="19:00" aria-describedby="helpId" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" value="Modificar" name="btn" class="btn btn-primary">Modificar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
 
@@ -252,7 +336,7 @@
         }
 
         /* FORMULARIO DE LAS CITAS */
-        form {
+        .formulario {
             padding: 1.25rem 2rem;
             background-color: white;
             border-radius: .75rem;
@@ -332,6 +416,24 @@
             const id = e.currentTarget.dataset.id;
             document.getElementById('elimCitaId').value = id;
         }
+
+
+        const modificarCita = e =>{
+            const id = document.getElementById('modId');
+            const paciente = document.getElementById('modCitaPaciente');
+            const consultorio = document.getElementById('modCitaConsultorio');
+            const procedimiento = document.getElementById('modCitaProcedimiento');
+            const fecha = document.getElementById('modCitaFecha');
+            const hora = document.getElementById('modCitaHora');
+
+            procedimiento.value = e.currentTarget.dataset.procedimiento;
+            paciente.value = e.currentTarget.dataset.paciente;
+            consultorio.value = e.currentTarget.dataset.consultorio;
+            fecha.value = e.currentTarget.dataset.fecha;
+            hora.value = e.currentTarget.dataset.hora;
+            id.value = e.currentTarget.dataset.id;
+        }
+
     </script>
 </body>
 

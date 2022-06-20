@@ -23,6 +23,21 @@ switch ($op) {
         break;
 
     case 'Modificar':
+        var_dump($_POST);
+        $cita = new Mattias\Dentista\Cita(
+            $_POST['modCitaFecha'],
+            $_POST['modCitaHora'],
+            $_POST['modCitaPaciente'],
+            $_POST['modCitaConsultorio'],
+            $_POST['modCitaProcedimiento'],
+            $_POST["modId"]
+        );
+        if ($cita->modificar(new Mattias\Dentista\Mysql())) {
+            header('Location:admCitas.php');
+        }
+        else {
+            echo "MAL";
+        }
         break;
 
 

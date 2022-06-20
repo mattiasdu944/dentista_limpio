@@ -1,7 +1,10 @@
 <?php
-    require_once("vendor/autoload.php");
     require_once("seguridad.php");
-    $listaPacientes = Mattias\Dentista\Paciente::listar(new Mattias\Dentista\Mysql());
+    require_once("vendor/autoload.php");
+    
+    $listaUsuarios = Mattias\Dentista\Usuarios::listarJoin(new Mattias\Dentista\Mysql());
+    $listaRoles = Mattias\Dentista\Rol::listar(new Mattias\Dentista\Mysql());
+    // var_dump($listaRoles);
     // var_dump($listaPacientes);
 ?>
 <!--uwu -->
@@ -14,31 +17,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="./Css/bootstrap.min.css">
-    <title>Lista de Pacientes</title>
+    <title>Lista Usuarios</title>
 </head> 
 
 <body>
     <?php include('parcials/sidebar.php');?>
     <main class="container section">
         <div class="pacientes_title">
-            <h1>Lista de Pacientes</h1>
+            <h1>Listado de Usuarios</h1>
             <p>
                 Administra tus Pacientes aquí.
             </p>
         </div>
         <hr>
             <p><span class="special_text big-text">
-                    <?=count($listaPacientes)?>
+                    <?=count($listaUsuarios)?>
                 </span> Pacientes</p>
 
             <!-- Button Agregar Paciente -->
             <button type="button" class="d-flex btn_paciente btn-xs special_text" data-bs-toggle="modal"
-                data-bs-target="#modelPaciente">
-                <i class="uil uil-plus"></i> Agregar Paciente
+                data-bs-target="#modalUsuario">
+                <i class="uil uil-plus"></i> Agregar Usuario
             </button>
 
             <!-- Modal Agregar Paciente -->
-            <div class="modal fade" id="modelPaciente" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -47,55 +50,47 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="ctrlPaciente.php" method="POST">
-                                <div class="row">
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="pacNombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" name="pacNombre" id="pacNombre"
-                                            aria-describedby="helpId" placeholder="Ingresa tu Nombre">
-                                    </div>
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="pacCI" class="form-label">CI</label>
-                                        <input type="text" class="form-control" name="pacCI" id="pacCI"
-                                            aria-describedby="helpId" placeholder="Ingresa tu CI">
-                                    </div>
+                            <form action="ctrlUsuario.php" method="POST">
+                                <div class=" mb-3">
+                                    <label for="usrNombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="usrNombre" id="usrNombre"
+                                        aria-describedby="helpId" placeholder="Ingresa tu Nombre">
                                 </div>
 
                                 <div class="row">
                                     <div class="col-12 col-md-6  mb-3">
-                                        <label for="pacPaterno" class="form-label">Apellido Paterno</label>
-                                        <input type="text" class="form-control" name="pacPaterno" id="pacPaterno"
+                                        <label for="usrPaterno" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" name="usrPaterno" id="usrPaterno"
                                             aria-describedby="helpId">
                                     </div>
                                     <div class="col-12 col-md-6  mb-3 ">
-                                        <label for="pacMaterno" class="form-label">Apellido Materno</label>
-                                        <input type="text" class="form-control" name="pacMaterno" id="pacMaterno"
+                                        <label for="usrMaterno" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" name="usrMaterno" id="usrMaterno"
                                             aria-describedby="helpId">
                                     </div>
                                 </div>
 
-                                <div class="row">
-
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="pacEdad" class="form-label">Edad</label>
-                                        <input type="number" class="form-control" name="pacEdad" id="pacEdad">
-                                    </div>
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="pacTelefono" class="form-label">Telefono</label>
-                                        <input type="number" max="99999999" class="form-control" name="pacTelefono"
-                                            id="pacTelefono" aria-describedby="helpId">
-                                    </div>
-
-                                </div>
-
                                 <div class="mb-3">
-                                    <label for="pacCorreo" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" name="pacCorreo" id="pacCorreo"
+                                    <label for="usrCorreo" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" name="usrCorreo" id="usrCorreo"
+                                        aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="usrContraseña" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" name="usrContraseña" id="usrContraseña"
                                         aria-describedby="helpId">
                                 </div>
 
+                                <select class="mb-3 form-select" name="usrRol" id="usrRol"
+                                    aria-label="Default select example">
+                                    <?php foreach ($listaRoles as $rol) { ?>
+                                    <option value="<?= $rol->getId()?>">
+                                        <?= $rol->getDescripcion()?>
+                                    </option>
+                                    <?php }?>
+                                </select>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" value="Guardar" name="btn" class="btn btn-primary">Guardar Paciente</button>
+                                <button type="submit" value="Guardar" name="btn" class="btn btn-primary">Guardar Usuario</button>
                             </form>
                         </div>
                     </div>
@@ -103,60 +98,55 @@
             </div>
 
         <?php
-            if(count($listaPacientes)> 0){
+            if(count($listaUsuarios)> 0){
         ?>
         <div class="scroll">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">CI</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Nombre/s</th>
                         <th scope="col">Apellido/s</th>
                         <th scope="col">Correo Electronico</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Edad</th>
+                        <th scope="col">Rol</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <?php foreach ($listaPacientes as $paciente) { ?>
+                <?php foreach ($listaUsuarios as $usuario) { ?>
                 <tr>
                     <td>
-                        <?= $paciente->getCi(); ?>
+                        <?= $usuario->id?>
                     </td>
                     <td>
-                        <?= $paciente->getNombres(); ?>
+                        <?= $usuario->nombres; ?>
                     </td>
                     <td>
-                        <?= $paciente->getPaterno();?>
-                        <?= $paciente->getMaterno();?>
+                        <?= $usuario->paterno?>
+                        <?= $usuario->materno?>
                     </td>
                     <td>
-                        <?= $paciente->getCorreo(); ?>
+                        <?= $usuario->correo?>
                     </td>
                     <td>
-                        <?= $paciente->getTelefono(); ?>
-                    </td>
-                    <td>
-                        <?= $paciente->getEdad(); ?>
+                        <?= $usuario->descripcion?>
                     </td>
                     <td class="table_actions">
                         <button type="button" class="button-editar" data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
-                            data-ci="<?= $paciente->getCi()?>"
-                            data-nombres="<?= $paciente->getNombres()?>"
-                            data-paterno="<?= $paciente->getPaterno()?>"
-                            data-materno="<?= $paciente->getMaterno()?>"
-                            data-edad="<?= $paciente->getEdad()?>"
-                            data-telefono="<?= $paciente->getTelefono()?>"
-                            data-correo="<?= $paciente->getCorreo()?>"
+                            data-ci="<?= $usuario->id?>"
+                            data-nombres="<?= $usuario->nombres?>"
+                            data-paterno="<?= $usuario->paterno?>"
+                            data-materno="<?= $usuario->materno?>"
+                            data-correo="<?= $usuario->correo?>"
+                            data-rol="<?= $usuario->rol?>"
                             onclick="modificarPaciente(event)"
                         >
                             <i class="uil uil-pen"></i>
                         </button>
                         <button type="button" class="button-borrar" data-bs-toggle="modal"
                             data-bs-target="#eliminarPaciente"
-                            data-id="<?= $paciente->getCi()?>"
-                            data-nombre = "<?= $paciente->getNombres()?>"
+                            data-id="<?= $usuario->id?>"
+                            data-nombre = "<?= $usuario->nombres?>"
                             onclick="eliminarPaciente(event)"
                             >
                             <i class="uil uil-trash-alt"></i>
@@ -260,7 +250,7 @@
         }else{
         ?>
         <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">No hay pacientes registrados</h4>
+            <h4 class="alert-heading">No hay Usuarios registrados</h4>
             <p>Para registrar un paciente, presione el boton de agregar paciente</p>
         </div>
         <?php

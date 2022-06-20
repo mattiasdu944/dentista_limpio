@@ -1,4 +1,5 @@
 <?php
+    require_once("seguridad.php");
     require_once("vendor/autoload.php");
     $listaProcedimientos = Mattias\Dentista\Procedimiento::listarTodo(new Mattias\Dentista\Mysql());
 ?>
