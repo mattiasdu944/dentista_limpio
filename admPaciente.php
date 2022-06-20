@@ -52,12 +52,12 @@
                                     <div class="col-12 col-md-6  mb-3">
                                         <label for="pacNombre" class="form-label">Nombre</label>
                                         <input type="text" class="form-control" name="pacNombre" id="pacNombre"
-                                            aria-describedby="helpId" placeholder="Ingresa tu Nombre">
+                                            aria-describedby="helpId" placeholder="Ingresa tu Nombre" required>
                                     </div>
                                     <div class="col-12 col-md-6  mb-3">
                                         <label for="pacCI" class="form-label">CI</label>
                                         <input type="text" class="form-control" name="pacCI" id="pacCI"
-                                            aria-describedby="helpId" placeholder="Ingresa tu CI">
+                                            aria-describedby="helpId" placeholder="Ingresa tu CI" required>
                                     </div>
                                 </div>
 
@@ -65,12 +65,12 @@
                                     <div class="col-12 col-md-6  mb-3">
                                         <label for="pacPaterno" class="form-label">Apellido Paterno</label>
                                         <input type="text" class="form-control" name="pacPaterno" id="pacPaterno"
-                                            aria-describedby="helpId">
+                                            aria-describedby="helpId" required>
                                     </div>
                                     <div class="col-12 col-md-6  mb-3 ">
                                         <label for="pacMaterno" class="form-label">Apellido Materno</label>
                                         <input type="text" class="form-control" name="pacMaterno" id="pacMaterno"
-                                            aria-describedby="helpId">
+                                            aria-describedby="helpId" required>
                                     </div>
                                 </div>
 
@@ -78,12 +78,12 @@
 
                                     <div class="col-12 col-md-6  mb-3">
                                         <label for="pacEdad" class="form-label">Edad</label>
-                                        <input type="number" class="form-control" name="pacEdad" id="pacEdad">
+                                        <input type="number" class="form-control" name="pacEdad" id="pacEdad" required>
                                     </div>
                                     <div class="col-12 col-md-6  mb-3">
                                         <label for="pacTelefono" class="form-label">Telefono</label>
                                         <input type="number" max="99999999" class="form-control" name="pacTelefono"
-                                            id="pacTelefono" aria-describedby="helpId">
+                                            id="pacTelefono" aria-describedby="helpId" required>
                                     </div>
 
                                 </div>
@@ -91,7 +91,7 @@
                                 <div class="mb-3">
                                     <label for="pacCorreo" class="form-label">Correo</label>
                                     <input type="email" class="form-control" name="pacCorreo" id="pacCorreo"
-                                        aria-describedby="helpId">
+                                        aria-describedby="helpId" required>
                                 </div>
 
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

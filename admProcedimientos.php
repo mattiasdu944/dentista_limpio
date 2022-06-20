@@ -32,7 +32,7 @@
                 <i class="uil uil-plus"></i> Agregar Procedimiento
             </button>
 
-            <!-- Modal Agregar Paciente -->
+            <!-- Modal Agregar Procedimiento -->
             <div class="modal fade" id="modelProcedimiento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -46,13 +46,13 @@
                                 <div class="  mb-3">
                                     <label for="tipoProcedimiento" class="form-label">Tipo de Procedimiento</label>
                                     <input type="text" class="form-control" name="tipoProcedimiento" id="tipoProcedimiento"
-                                        aria-describedby="helpId" placeholder="Ingresa tu Nombre">
+                                        aria-describedby="helpId" placeholder="Ingresa tu Nombre" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="costoProcedimiento" class="form-label">Costo promedio del procedimiento</label>
                                     <input type="number" class="form-control" name="costoProcedimiento" id="costoProcedimiento"
-                                        aria-describedby="helpId">
+                                        aria-describedby="helpId" required>
                                 </div>
 
                                 <div class="mb-3 form-check">
@@ -181,13 +181,13 @@
                                     <div class="mb-3">
                                         <label for="modProcedimiento" class="form-label">Procedimiento</label>
                                         <input type="text" class="form-control" name="modProcedimiento" id="modProcedimiento"
-                                            aria-describedby="helpId" placeholder="Tipo de Procedimiento" require>
+                                            aria-describedby="helpId" placeholder="Tipo de Procedimiento" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="modCosto" class="form-label">Costo</label>
-                                        <input type="number" class="form-control" name="modCosto" id="modCosto" placeholder="Ingrese el costo" require
-                                            aria-describedby="HelpId" require>
+                                        <input type="number" class="form-control" name="modCosto" id="modCosto" placeholder="Ingrese el costo" required
+                                            aria-describedby="HelpId" required>
                                     </div>
 
                                     <div class="form-check">

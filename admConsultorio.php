@@ -40,7 +40,7 @@
                     <div class="  mb-3">
                         <label for="dirConsultorio" class="form-label">Direccion/s</label>
                         <input type="text" class="form-control" name="dirConsultorio" id="dirConsultorio"
-                            aria-describedby="helpId" placeholder="Ingresa la direccion">
+                            aria-describedby="helpId" placeholder="Ingresa la direccion" required>
                     </div>
                     <div class="mb-3">
                         <label for="horarioConsultorio" class="form-label">Dias y Horarios</label>
@@ -164,7 +164,7 @@
                                     <div class="mb-3">
                                         <label for="modDireccion" class="form-label">Direccion</label>
                                         <input type="text" class="form-control" name="modDireccion" id="modDireccion"
-                                            aria-describedby="helpId" placeholder="Direccion del consultorio" require>
+                                            aria-describedby="helpId" placeholder="Direccion del consultorio" required>
                                     </div>
 
                                     <div class="mb-3">

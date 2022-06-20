@@ -175,7 +175,7 @@
                                     <div class="mb-3">
                                         <label for="modUsrNombre" class="form-label">Nombres</label>
                                         <input type="text" class="form-control" name="modUsrNombre" id="modUsrNombre"
-                                            aria-describedby="helpId" >
+                                            aria-describedby="helpId" required >
                                     </div>
                                 </div>
 
@@ -183,19 +183,19 @@
                                     <div class="col-12 col-md-6  mb-3">
                                         <label for="modUsrPaterno" class="form-label">Apellido Paterno</label>
                                         <input type="text" class="form-control" name="modUsrPaterno" id="modUsrPaterno"
-                                            aria-describedby="helpId">
+                                            aria-describedby="helpId" required>
                                     </div>
                                     <div class="col-12 col-md-6  mb-3 ">
                                         <label for="modUsrMaterno" class="form-label">Apellido Materno</label>
                                         <input type="text" class="form-control" name="modUsrMaterno" id="modUsrMaterno"
-                                            aria-describedby="helpId">
+                                            aria-describedby="helpId" required>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="modUsrCorreo" class="form-label">Correo</label>
                                     <input type="email" class="form-control" name="modUsrCorreo" id="modUsrCorreo"
-                                        aria-describedby="helpId">
+                                        aria-describedby="helpId" required>
                                 </div>
 
                                 <label for="modUsrRol" class="form-label">Rol</label>
