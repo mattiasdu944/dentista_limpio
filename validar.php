@@ -9,6 +9,7 @@ if (isset($_POST["correoUsuario"]) && isset($_POST["passUsuario"])) {
         $_SESSION["usuario"] = $usuario->getNombres();
         $_SESSION["correo"] = $usuario->getCorreo();
         $_SESSION["rol"] = $usuario->getRol();
+        $_SESSION["pass"] = $usuario->getPassword();
         header('Location:admPaciente.php');
     }
     else{

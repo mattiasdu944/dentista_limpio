@@ -46,7 +46,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Agregar Paciente</h5>
+                            <h5 class="modal-title">Agregar Usuario</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -118,7 +118,7 @@
                         <?= $usuario->id?>
                     </td>
                     <td>
-                        <?= $usuario->nombres; ?>
+                        <?= $usuario->nombres ?>
                     </td>
                     <td>
                         <?= $usuario->paterno?>
@@ -132,19 +132,20 @@
                     </td>
                     <td class="table_actions">
                         <button type="button" class="button-editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            data-ci="<?= $usuario->id?>"
+                            data-bs-target="#modificarUsuario"
+                            data-id="<?= $usuario->id?>"
                             data-nombres="<?= $usuario->nombres?>"
                             data-paterno="<?= $usuario->paterno?>"
                             data-materno="<?= $usuario->materno?>"
                             data-correo="<?= $usuario->correo?>"
                             data-rol="<?= $usuario->rol?>"
+                            data-pass="<?= $usuario->password?>"
                             onclick="modificarPaciente(event)"
                         >
                             <i class="uil uil-pen"></i>
                         </button>
                         <button type="button" class="button-borrar" data-bs-toggle="modal"
-                            data-bs-target="#eliminarPaciente"
+                            data-bs-target="#eliminarUsuario"
                             data-id="<?= $usuario->id?>"
                             data-nombre = "<?= $usuario->nombres?>"
                             onclick="eliminarPaciente(event)"
@@ -157,61 +158,55 @@
                 </tbody>
             </table>
 
-            <!-- MODAL MODIFICAR PACIENTE -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- MODAL MODIFICAR Usuario -->
+            <div class="modal fade" id="modificarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Modificar Usuario</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="ctrlPaciente.php" method="POST">
+                            <form action="ctrlUsuario.php" method="POST">
+                                <input type="hidden" id="modUsrId" name="modUsrId">
+                                <input type="hidden" id="modUsrPass" name="modUsrPass">
                                 <div class="row">
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="modPacNombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" name="modPacNombre" id="modPacNombre"
-                                            aria-describedby="helpId" >
-                                    </div>
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="modPacCI" class="form-label">CI</label>
-                                        <input type="text" class="form-control" name="modPacCI" id="modPacCI"
+                                    <div class="mb-3">
+                                        <label for="modUsrNombre" class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" name="modUsrNombre" id="modUsrNombre"
                                             aria-describedby="helpId" >
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-12 col-md-6  mb-3">
-                                        <label for="modPacPaterno" class="form-label">Apellido Paterno</label>
-                                        <input type="text" class="form-control" name="modPacPaterno" id="modPacPaterno"
+                                        <label for="modUsrPaterno" class="form-label">Apellido Paterno</label>
+                                        <input type="text" class="form-control" name="modUsrPaterno" id="modUsrPaterno"
                                             aria-describedby="helpId">
                                     </div>
                                     <div class="col-12 col-md-6  mb-3 ">
-                                        <label for="modPacMaterno" class="form-label">Apellido Materno</label>
-                                        <input type="text" class="form-control" name="modPacMaterno" id="modPacMaterno"
+                                        <label for="modUsrMaterno" class="form-label">Apellido Materno</label>
+                                        <input type="text" class="form-control" name="modUsrMaterno" id="modUsrMaterno"
                                             aria-describedby="helpId">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="modPacEdad" class="form-label">Edad</label>
-                                        <input type="number" class="form-control" name="modPacEdad" id="modPacEdad">
-                                    </div>
-                                    <div class="col-12 col-md-6  mb-3">
-                                        <label for="modPacTelefono" class="form-label">Telefono</label>
-                                        <input type="number" max="99999999" class="form-control" name="modPacTelefono"
-                                            id="modPacTelefono" aria-describedby="helpId">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="modPacCorreo" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" name="modPacCorreo" id="modPacCorreo"
+                                    <label for="modUsrCorreo" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" name="modUsrCorreo" id="modUsrCorreo"
                                         aria-describedby="helpId">
                                 </div>
+
+                                <label for="modUsrRol" class="form-label">Rol</label>
+                                <select class="mb-3 form-select" name="modUsrRol" id="modUsrRol"
+                                    aria-label="Default select example">
+                                    <?php foreach ($listaRoles as $rol) { ?>
+                                    <option value="<?= $rol->getId()?>">
+                                        <?= $rol->getDescripcion()?>
+                                    </option>
+                                    <?php }?>
+                                </select>
 
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" value="Modificar" name="btn" class="btn btn-primary">Modificar Paciente</button>
@@ -221,20 +216,20 @@
                 </div>
             </div>
 
-            <!-- MODAL ELIMINAR PACIENTE-->
-            <div class="modal fade" id="eliminarPaciente" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- MODAL ELIMINAR USUARIO-->
+            <div class="modal fade" id="eliminarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="ctrlPaciente.php" method="POST">
+                        <form action="ctrlUsuario.php" method="POST">
 
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Eliminar Paciente</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden"  name="elimPacCI" id="elimPacCI">
-                                <p>¿Esta seguro de eliminar al paciente <span id="nombrePaciente"></span>?</p>
+                                <input type="hidden"  name="elimUsrId" id="elimUsrId">
+                                <p>¿Esta seguro de eliminar al paciente <span id="nombreUsuario"></span>?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -350,26 +345,28 @@
             const id = e.currentTarget.dataset.id;
             const nombre = e.currentTarget.dataset.nombre;
 
-            document.getElementById('nombrePaciente').innerHTML = nombre;
-            document.getElementById('elimPacCI').value = id;
+            document.getElementById('nombreUsuario').innerHTML = nombre;
+            document.getElementById('elimUsrId').value = id;
         }
 
         const modificarPaciente= e =>{
-            const ci = document.getElementById('modPacCI');
-            const nombre = document.getElementById('modPacNombre');
-            const edad = document.getElementById('modPacEdad');
-            const telefono = document.getElementById('modPacTelefono');
-            const correo = document.getElementById('modPacCorreo');
-            const paterno = document.getElementById('modPacPaterno');
-            const materno = document.getElementById('modPacMaterno');
+            const id = document.getElementById('modUsrId');
+            const nombre = document.getElementById('modUsrNombre');
+            const correo = document.getElementById('modUsrCorreo');
+            const paterno = document.getElementById('modUsrPaterno');
+            const materno = document.getElementById('modUsrMaterno');
+            const rol = document.getElementById('modUsrRol');
+            const pass = document.getElementById('modUsrPass');
 
-            ci.value = e.currentTarget.dataset.ci;
+
+
+            id.value = e.currentTarget.dataset.id;
             nombre.value = e.currentTarget.dataset.nombres;
-            edad.value = e.currentTarget.dataset.edad;
-            telefono.value = e.currentTarget.dataset.telefono;
             correo.value = e.currentTarget.dataset.correo;
             paterno.value = e.currentTarget.dataset.paterno;
             materno.value = e.currentTarget.dataset.materno;
+            rol.value = e.currentTarget.dataset.rol;
+            pass.value = e.currentTarget.dataset.pass;
         }
     </script>
 </body>

@@ -20,7 +20,7 @@
               <span class="nav__logo-name">
                 <?=$_SESSION['usuario']?>
               </span>
-              
+              <br>
               <span class="nav__name">
                 <?php
                 if($_SESSION['rol'] == 1){
